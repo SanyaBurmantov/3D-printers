@@ -1,10 +1,12 @@
 import React from 'react';
+import ModalTest from "@/components/UI/ModalTest";
 
 const GetStarted = () => {
     return (
         <div
             className="relative bg-white dark:bg-dark pt-[120px] pb-[110px] lg:pt-[150px]"
         >
+            <ModalTest />
             <div className="container mx-auto">
                 <div className="flex flex-wrap items-center -mx-4">
                     <div className="w-full px-4 lg:w-5/12">

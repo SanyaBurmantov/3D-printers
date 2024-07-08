@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const Page = () => {
     return (
+
         <div>
             <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]">
                 <div className="container">

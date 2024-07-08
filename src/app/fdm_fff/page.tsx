@@ -1,8 +1,13 @@
+'use client'
 import React from 'react';
 import Link from "next/link";
+import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure} from "@nextui-org/react";
 
 const Page = () => {
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
     return (
+        <>
+
         <div>
             <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]">
                 <div className="container">
@@ -22,6 +27,7 @@ const Page = () => {
                                 >
                                     Пиздец, назад
                                 </Link>
+                                <Button onPress={onOpen}>Open Modal</Button>
                                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores aut
                                     cumque deleniti doloremque incidunt laboriosam, laudantium, magni modi nesciunt
@@ -41,6 +47,40 @@ const Page = () => {
                 </div>
             </section>
         </div>
+            <Modal
+                isOpen={isOpen}
+                placement={'center'}
+                onOpenChange={onOpenChange}
+            >
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+                            <ModalBody>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Nullam pulvinar risus non risus hendrerit venenatis.
+                                    Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                                </p>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Nullam pulvinar risus non risus hendrerit venenatis.
+                                    Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                                </p>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="danger" variant="light" onPress={onClose}>
+                                    Close
+                                </Button>
+                                <Button color="primary" onPress={onClose}>
+                                    Action
+                                </Button>
+                            </ModalFooter>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+        </>
     );
 };
 
