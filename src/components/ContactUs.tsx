@@ -1,5 +1,17 @@
 import React from "react";
 
+export interface IContactInputBox {
+    type: string,
+    placeholder: string,
+    name: string
+}
+
+export interface IContactTextArea {
+    row: any,
+    placeholder: string,
+    name: string,
+    defaultValue: any,
+}
 const ContactUs = () => {
     return (
         <>
@@ -957,7 +969,7 @@ const ContactUs = () => {
 
 export default ContactUs;
 
-const ContactTextArea = ({ row, placeholder, name, defaultValue }) => {
+const ContactTextArea = ({ row, placeholder, name, defaultValue }: IContactTextArea) => {
     return (
         <>
             <div className="mb-6">
@@ -973,7 +985,7 @@ const ContactTextArea = ({ row, placeholder, name, defaultValue }) => {
     );
 };
 
-const ContactInputBox = ({ type, placeholder, name }) => {
+const ContactInputBox = ({ type, placeholder, name }: IContactInputBox) => {
     return (
         <>
             <div className="mb-6">
