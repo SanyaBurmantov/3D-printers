@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 const Page = () => {
     return (
@@ -14,6 +15,11 @@ const Page = () => {
                                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
                                     Зацени это бля! Хули ты сучка
                                 </p>
+                                <Link href={'/'}
+                                      className="mb-9 bg-dark dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-md inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:border-body-color disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
+                                >
+                                    Пиздец, назад
+                                </Link>
                                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores aut
                                     cumque deleniti doloremque incidunt laboriosam, laudantium, magni modi nesciunt
