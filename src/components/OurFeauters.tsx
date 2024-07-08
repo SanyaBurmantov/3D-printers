@@ -1,8 +1,13 @@
 import React from "react";
+import {router} from "next/client";
+import {Router} from "next/router";
+import Link from "next/link";
 export interface IServiceCard {
     icon: any,
     title: string,
-    details: any
+    details: any,
+    route
+        : string,
 }
 const OurFeatures = () => {
     return (
@@ -23,6 +28,7 @@ const OurFeatures = () => {
 
                 <div className="-mx-4 flex flex-wrap">
                     <ServiceCard
+                        route={'/fdm_fff'}
                         title="FDM/FFF"
                         details="Можем такую поебень"
                         icon={
@@ -41,6 +47,7 @@ const OurFeatures = () => {
                         }
                     />
                     <ServiceCard
+                        route={'/sla'}
                         title="SLA"
                         details="А можем так, ахуеть да?"
                         icon={
@@ -61,6 +68,7 @@ const OurFeatures = () => {
                         }
                     />
                     <ServiceCard
+                        route={'/sls'}
                         title="SLS"
                         details="А как тебе такое????"
                         icon={
@@ -91,6 +99,7 @@ const OurFeatures = () => {
                         }
                     />
                     <ServiceCard
+                        route={'/slm'}
                         title="SLM"
                         details="Как же сильны наши принтеры, как же мы пиздаты!"
                         icon={
@@ -120,10 +129,11 @@ const OurFeatures = () => {
 
 export default OurFeatures;
 
-const ServiceCard = ({ icon, title, details }: IServiceCard) => {
+const ServiceCard = ({ icon, title, details, route }: IServiceCard) => {
     return (
         <>
             <div className="w-full px-4 md:w-1/2 lg:w-1/2">
+                <Link href={route} >
                 <div className="mb-9 rounded-[20px] bg-white p-10 shadow-2 hover:shadow-lg dark:bg-dark-2 md:px-7 xl:px-10">
                     <div className="mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-2xl bg-primary">
                         {icon}
@@ -133,6 +143,7 @@ const ServiceCard = ({ icon, title, details }: IServiceCard) => {
                     </h4>
                     <p className="text-body-color dark:text-dark-6">{details}</p>
                 </div>
+                </Link>
             </div>
         </>
     );
