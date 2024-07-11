@@ -28,12 +28,11 @@ const Page = () => {
                                     omnis quasi quia repudiandae saepe, sit voluptatem!
                                 </p>
                             </div>
-                            <a
-                                href="javascript:void(0)"
-                                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-blue-dark lg:px-7"
+                            <Link href={'/create_order'}
+                                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-blue-dark lg:px-7"
                             >
                                 Дайте два блять
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

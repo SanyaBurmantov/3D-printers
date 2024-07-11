@@ -27,7 +27,7 @@ const Page = () => {
                                 >
                                     Пиздец, назад
                                 </Link>
-                                <Button onPress={onOpen}>Open Modal</Button>
+
                                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores aut
                                     cumque deleniti doloremque incidunt laboriosam, laudantium, magni modi nesciunt
@@ -36,12 +36,11 @@ const Page = () => {
                                     omnis quasi quia repudiandae saepe, sit voluptatem!
                                 </p>
                             </div>
-                            <a
-                                href="javascript:void(0)"
+                            <Link href={'/create_order'}
                                 className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-blue-dark lg:px-7"
                             >
                                 Дайте два блять
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
