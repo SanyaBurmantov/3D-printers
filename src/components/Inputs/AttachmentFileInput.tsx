@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button} from "@nextui-org/react";
 
 interface File {
@@ -9,7 +9,7 @@ interface File {
 }
 
 interface AttachmentsFileInputProps {
-    downloadFilesCallback: () => void;
+    downloadFilesCallback: (filesDownload: boolean) => void;
 }
 
 export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
@@ -39,6 +39,13 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
         setPreviewUrls(newPreviewUrls);
     };
 
+    useEffect(() => {
+        if(files.length){
+            props.downloadFilesCallback(true)
+        } else {
+            props.downloadFilesCallback(false)
+        }
+    }, [files]);
     return (
         <div>
             <label className='mb-[10px] block text-base font-medium text-dark dark:text-white'>
@@ -122,7 +129,6 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
                                 </div>
                             ))}
                         </div>
-                        <Button className="mt-4" color="primary" onClick={props.downloadFilesCallback}>Продолжить</Button>
                     </>
                 )}
             </div>

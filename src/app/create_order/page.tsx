@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Checkbox} from "@nextui-org/checkbox";
 import {AttachmentsFileInput} from "@/components/Inputs/AttachmentFileInput";
 import {Input, Textarea} from "@nextui-org/input";
@@ -13,6 +13,7 @@ const Page = () => {
     const [filesDownload, setFilesDownload] = React.useState(false);
     const [selectedTechnology, setSelectedTechnology] = React.useState(new Set(["fdm/fff"]));
     const [selectedMaterial, setSelectedMaterial] = React.useState(new Set(["flex"]));
+    const [selectedSomething, setSelectedSomething] = React.useState(false)
 
     const handleNeedScan = (isSelected: boolean) => {
         setNeedScan(isSelected)
@@ -24,8 +25,8 @@ const Page = () => {
         setNeedPrint(isSelected)
     }
 
-    const handleFilesDownload = () => {
-        setFilesDownload(true)
+    const handleFilesDownload = (filesDownload: boolean) => {
+        setFilesDownload(filesDownload)
     }
 
     const handleSelectTechnology = (keys: any) => {
@@ -43,6 +44,16 @@ const Page = () => {
         () => Array.from(selectedMaterial).join(", ").replaceAll("_", " "),
         [selectedMaterial]
     );
+
+    useEffect(() => {
+        if (needPrint) {
+            setSelectedSomething(true)
+        } else if (needScan) {
+            setSelectedSomething(true)
+        } else if (needModel) {
+            setSelectedSomething(true)
+        } else setSelectedSomething(false)
+    }, [needPrint, needScan, needModel]);
 
     return (
         <>
@@ -67,12 +78,12 @@ const Page = () => {
                         <Checkbox onValueChange={handleNeedModel}>3D моделирование</Checkbox>
                         <Checkbox onValueChange={handleNeedPrint}>3D печать</Checkbox>
                     </div>
-                    {needScan && (
+                    {selectedSomething && (
                         <>
                             <AttachmentsFileInput downloadFilesCallback={handleFilesDownload}/>
                         </>
                     )}
-                    <div className="flex flex-col gap-4 mt-3">
+                    <div className="flex flex-col gap-4 mt-6">
                         <table className="w-full border-collapse">
                             {filesDownload && needScan && (
                                 <tr className="border-b border-gray-300 pb-4 mb-4">
