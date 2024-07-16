@@ -10,9 +10,10 @@ const Page = () => {
     const [needScan, setNeedScan] = React.useState(false);
     const [needModel, setNeedModel] = React.useState(false);
     const [needPrint, setNeedPrint] = React.useState(false);
+    const [needHelp, setNeedHelp] = React.useState(false);
     const [filesDownload, setFilesDownload] = React.useState(false);
-    const [selectedTechnology, setSelectedTechnology] = React.useState(new Set(["fdm/fff"]));
-    const [selectedMaterial, setSelectedMaterial] = React.useState(new Set(["flex"]));
+    const [selectedTechnology, setSelectedTechnology] = React.useState(new Set(["FDM/FFF"]));
+    const [selectedMaterial, setSelectedMaterial] = React.useState(new Set(["FLEX"]));
     const [selectedSomething, setSelectedSomething] = React.useState(false)
 
     const handleNeedScan = (isSelected: boolean) => {
@@ -54,6 +55,14 @@ const Page = () => {
             setSelectedSomething(true)
         } else setSelectedSomething(false)
     }, [needPrint, needScan, needModel]);
+
+    useEffect(() => {
+        if(selectedMaterial.has("Мне нужна помощь")){
+            setNeedHelp(true)
+        } else {
+            setNeedHelp(false)
+        }
+    }, [selectedMaterial])
 
     return (
         <>
@@ -112,9 +121,26 @@ const Page = () => {
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
                                                 <Dropdown>
                                                     <DropdownTrigger>
-                                                        <Button variant="bordered" className="capitalize">
-                                                            {selectedTechValue}
-                                                        </Button>
+                                                        {/*<Button variant="bordered" className="capitalize">*/}
+                                                        {/*    {selectedTechValue}*/}
+                                                        {/*</Button>*/}
+                                                        <div
+                                                            className="flex flex-wrap md:flex-nowrap gap-4 items-center">
+                                                            <Input
+                                                                type="text"
+                                                                labelPlacement="outside-left"
+                                                                endContent={
+                                                                    <div
+                                                                        className="pointer-events-none flex items-center">
+                                                                        <span
+                                                                            className="text-default-400 text-small">
+                                                                               ▼
+                                                                        </span>
+                                                                    </div>
+                                                                }
+                                                                value={selectedTechValue}
+                                                            />
+                                                        </div>
                                                     </DropdownTrigger>
                                                     <DropdownMenu
                                                         aria-label="Single selection example"
@@ -124,10 +150,10 @@ const Page = () => {
                                                         selectedKeys={selectedTechnology}
                                                         onSelectionChange={handleSelectTechnology}
                                                     >
-                                                        <DropdownItem key="fdm/fff">FDM/FFF</DropdownItem>
-                                                        <DropdownItem key="sla">SLA</DropdownItem>
-                                                        <DropdownItem key="sls">SLS</DropdownItem>
-                                                        <DropdownItem key="slm">SLM</DropdownItem>
+                                                        <DropdownItem key="FDM/FFF">FDM/FFF</DropdownItem>
+                                                        <DropdownItem key="SLA">SLA</DropdownItem>
+                                                        <DropdownItem key="SLS">SLS</DropdownItem>
+                                                        <DropdownItem key="SLM">SLM</DropdownItem>
                                                     </DropdownMenu>
                                                 </Dropdown>
                                             </div>
@@ -139,9 +165,26 @@ const Page = () => {
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
                                                 <Dropdown>
                                                     <DropdownTrigger>
-                                                        <Button variant="bordered" className="capitalize">
-                                                            {selectedMaterialValue}
-                                                        </Button>
+                                                        {/*<Button variant="bordered" className="capitalize">*/}
+                                                        {/*    {selectedMaterialValue}*/}
+                                                        {/*</Button>*/}
+                                                        <div
+                                                            className="flex flex-wrap md:flex-nowrap gap-4 items-center">
+                                                            <Input
+                                                                type="text"
+                                                                labelPlacement="outside-left"
+                                                                endContent={
+                                                                    <div
+                                                                        className="pointer-events-none flex items-center">
+                                                                        <span
+                                                                            className="text-default-400 text-small">
+                                                                               ▼
+                                                                        </span>
+                                                                    </div>
+                                                                }
+                                                                value={selectedMaterialValue}
+                                                            />
+                                                        </div>
                                                     </DropdownTrigger>
                                                     <DropdownMenu
                                                         aria-label="Single selection example"
@@ -151,37 +194,43 @@ const Page = () => {
                                                         selectedKeys={selectedMaterial}
                                                         onSelectionChange={handleSelectMaterial}
                                                     >
-                                                        <DropdownItem key="flex">FLEX</DropdownItem>
-                                                        <DropdownItem key="hips">HIPS</DropdownItem>
-                                                        <DropdownItem key="pva">PVA</DropdownItem>
-                                                        <DropdownItem key="petg">PETG</DropdownItem>
-                                                        <DropdownItem key="pla">PLA</DropdownItem>
-                                                        <DropdownItem key="nylon">Nylon</DropdownItem>
-                                                        <DropdownItem key="polycarbonate">Polycarbonate</DropdownItem>
-                                                        <DropdownItem key="abs">ABS</DropdownItem>
-                                                        <DropdownItem key="pp">PP</DropdownItem>
+                                                        <DropdownItem key="FLEX">FLEX</DropdownItem>
+                                                        <DropdownItem key="HIPS">HIPS</DropdownItem>
+                                                        <DropdownItem key="PVA">PVA</DropdownItem>
+                                                        <DropdownItem key="PETG">PETG</DropdownItem>
+                                                        <DropdownItem key="PLA">PLA</DropdownItem>
+                                                        <DropdownItem key="Nylon">Nylon</DropdownItem>
+                                                        <DropdownItem key="Polycarbonate">Polycarbonate</DropdownItem>
+                                                        <DropdownItem key="ABS">ABS</DropdownItem>
+                                                        <DropdownItem key="PP">PP</DropdownItem>
+                                                        <DropdownItem key="Мне нужна помощь">Мне нужна помощь</DropdownItem>
+
                                                     </DropdownMenu>
                                                 </Dropdown>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr className="border-b border-gray-300 pb-4 mb-4">
-                                        <td className="w-1/4 font-medium">Нагрузки</td>
-                                        <td className="w-3/4">
-                                            <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Укажите нагрузки" labelPlacement="outside-left"/>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr className="border-b border-gray-300 pb-4 mb-4">
-                                        <td className="w-1/4 font-medium">Условия эксплуатации</td>
-                                        <td className="w-3/4">
-                                            <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Опишите условия эксплуатации"
-                                                       labelPlacement="outside-left"/>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    {needHelp && (
+                                        <>
+                                            <tr className="border-b border-gray-300 pb-4 mb-4">
+                                                <td className="w-1/4 font-medium">Нагрузки</td>
+                                                <td className="w-3/4">
+                                                    <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
+                                                        <Input placeholder="Укажите нагрузки" labelPlacement="outside-left"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr className="border-b border-gray-300 pb-4 mb-4">
+                                                <td className="w-1/4 font-medium">Условия эксплуатации</td>
+                                                <td className="w-3/4">
+                                                    <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
+                                                        <Input placeholder="Опишите условия эксплуатации"
+                                                               labelPlacement="outside-left"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </>
+                                    )}
                                     <tr className="border-b border-gray-300 pb-4 mb-4">
                                         <td className="w-1/4 font-medium">Количество</td>
                                         <td className="w-3/4">
@@ -234,6 +283,9 @@ const Page = () => {
                                 </>
                             )}
                         </table>
+                        <div>
+                            <Button className="mt-3" color="primary">Сделать заказ</Button>
+                        </div>
                     </div>
 
                 </div>

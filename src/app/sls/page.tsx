@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Page = () => {
     return (
-        <div>111
+        <div>
             <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]">
                 <div className="container">
                     <div className="-mx-4 flex flex-wrap lg:justify-between">
