@@ -36,6 +36,41 @@ const Page = () => {
     const handleSelectMaterial = (keys: any) => {
         setSelectedMaterial(keys)
     }
+    const handleSelectGabarit = (value: string) => {
+
+    }
+
+    const handleSelectPreasure = (value: string) => {
+
+    }
+
+    const handleSelectUses = (value: string) => {
+
+    }
+
+    const handleSelectCount = (value: string) => {
+
+    }
+
+    const handleSelectComment = (value: string) => {
+
+    }
+
+    const handleSelectNumber  = (value: string) => {
+
+    }
+
+    const handleSelectMail = (value: string) => {
+
+    }
+
+    const handleSelectFio = (value: string) => {
+
+    }
+
+    const handleSelectOrg = (value: string) => {
+
+    }
 
     const selectedTechValue = React.useMemo(
         () => Array.from(selectedTechnology).join(", ").replaceAll("_", " "),
@@ -287,7 +322,6 @@ const Page = () => {
                             <Button className="mt-3" color="primary">Сделать заказ</Button>
                         </div>
                     </div>
-
                 </div>
             </section>
         </>
