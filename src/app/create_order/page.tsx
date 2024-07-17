@@ -15,6 +15,15 @@ const Page = () => {
     const [selectedTechnology, setSelectedTechnology] = React.useState(new Set(["FDM/FFF"]));
     const [selectedMaterial, setSelectedMaterial] = React.useState(new Set(["FLEX"]));
     const [selectedSomething, setSelectedSomething] = React.useState(false)
+    const [gabarit, setGabarit] = React.useState('');
+    const [pressure, setPressure] = React.useState('');
+    const [uses, setUses] = React.useState('');
+    const [count, setCount] = React.useState(0);
+    const [comment, setComment] = React.useState('');
+    const [number, setNumber] = React.useState('');
+    const [mail, setMail] = React.useState('');
+    const [fio, setFio] = React.useState('');
+    const [org, setOrg] = React.useState('');
 
     const handleNeedScan = (isSelected: boolean) => {
         setNeedScan(isSelected)
@@ -36,39 +45,76 @@ const Page = () => {
     const handleSelectMaterial = (keys: any) => {
         setSelectedMaterial(keys)
     }
-    const handleSelectGabarit = (value: string) => {
+    const handleSelectGabarit = (value: any) => {
+        setGabarit(value);
+    };
 
-    }
+    const handleSelectPreasure = (value: any) => {
+        setPressure(value);
+    };
 
-    const handleSelectPreasure = (value: string) => {
+    const handleSelectUses = (value: any) => {
+        setUses(value);
+    };
 
-    }
+    const handleSelectCount = (value: any) => {
+        setCount(value);
+    };
 
-    const handleSelectUses = (value: string) => {
+    const handleSelectComment = (value: any) => {
+        setComment(value);
+    };
 
-    }
+    const handleSelectNumber = (value: any) => {
+        setNumber(value);
+    };
 
-    const handleSelectCount = (value: string) => {
+    const handleSelectMail = (value: any) => {
+        setMail(value);
+    };
 
-    }
+    const handleSelectFio = (value: any) => {
+        setFio(value);
+    };
 
-    const handleSelectComment = (value: string) => {
+    const handleSelectOrg = (value: any) => {
+        setOrg(value);
 
-    }
+    };
 
-    const handleSelectNumber  = (value: string) => {
-
-    }
-
-    const handleSelectMail = (value: string) => {
-
-    }
-
-    const handleSelectFio = (value: string) => {
-
-    }
-
-    const handleSelectOrg = (value: string) => {
+    const handleCreateOrder = () => {
+        console.log({
+            "нужно сканирование": needScan,
+            "нужно моделирование": needModel,
+            "нужна печать": needPrint,
+            "габариты": gabarit,
+            "технология": selectedTechnology.values().next().value,
+            "материал": selectedMaterial.values().next().value,
+            "колличество": count,
+            "нагрузки": pressure,
+            "использование": uses,
+            "коммент": comment,
+            "номер телефона": number,
+            "почта": mail,
+            "фио": fio,
+            "организация": org,
+        })
+        return {
+            "нужно сканирование": needScan,
+            "нужно моделирование": needModel,
+            "нужна печать": needPrint,
+            "габариты": gabarit,
+            "технология": selectedTechnology.values().next().value,
+            "материал": selectedMaterial.values().next().value,
+            "колличество": count,
+            "нагрузки": pressure,
+            "использование": uses,
+            "коммент": comment,
+            "номер телефона": number,
+            "почта": mail,
+            "фио": fio,
+            "организация": org,
+        }
 
     }
 
@@ -143,6 +189,7 @@ const Page = () => {
                                                         <span className="text-default-400 text-small">мм</span>
                                                     </div>
                                                 }
+                                                onValueChange={handleSelectGabarit}
                                             />
                                         </div>
                                     </td>
@@ -251,7 +298,7 @@ const Page = () => {
                                                 <td className="w-1/4 font-medium">Нагрузки</td>
                                                 <td className="w-3/4">
                                                     <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                        <Input placeholder="Укажите нагрузки" labelPlacement="outside-left"/>
+                                                        <Input placeholder="Укажите нагрузки" labelPlacement="outside-left" onValueChange={handleSelectPreasure}/>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -259,7 +306,7 @@ const Page = () => {
                                                 <td className="w-1/4 font-medium">Условия эксплуатации</td>
                                                 <td className="w-3/4">
                                                     <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                        <Input placeholder="Опишите условия эксплуатации"
+                                                        <Input placeholder="Опишите условия эксплуатации" onValueChange={handleSelectUses}
                                                                labelPlacement="outside-left"/>
                                                     </div>
                                                 </td>
@@ -270,7 +317,7 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Количество</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Введите количество" labelPlacement="outside-left"/>
+                                                <Input placeholder="Введите количество" labelPlacement="outside-left" onValueChange={handleSelectCount}/>
                                             </div>
                                         </td>
                                     </tr>
@@ -278,7 +325,7 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Комментарий</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Textarea placeholder="Ваш комментарий" className="max-w-xs"/>
+                                                <Textarea placeholder="Ваш комментарий" className="max-w-xs" onValueChange={handleSelectComment}/>
                                             </div>
                                         </td>
                                     </tr>
@@ -287,7 +334,7 @@ const Page = () => {
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
                                                 <Input placeholder="Контактный телефон" labelPlacement="outside-left"
-                                                       required={true}/>
+                                                       required={true} onValueChange={handleSelectNumber}/>
                                             </div>
                                         </td>
                                     </tr>
@@ -295,7 +342,7 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Почта</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Ваша почта" labelPlacement="outside-left"/>
+                                                <Input placeholder="Ваша почта" labelPlacement="outside-left" onValueChange={handleSelectMail}/>
                                             </div>
                                         </td>
                                     </tr>
@@ -303,7 +350,7 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Ваши ФИО</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="ФИО" labelPlacement="outside-left" required={true}/>
+                                                <Input placeholder="ФИО" labelPlacement="outside-left" required={true} onValueChange={handleSelectFio}/>
                                             </div>
                                         </td>
                                     </tr>
@@ -311,7 +358,7 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Организация</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Ваша организация" labelPlacement="outside-left"/>
+                                                <Input placeholder="Ваша организация" labelPlacement="outside-left" onValueChange={handleSelectOrg}/>
                                             </div>
                                         </td>
                                     </tr>
@@ -319,7 +366,7 @@ const Page = () => {
                             )}
                         </table>
                         <div>
-                            <Button className="mt-3" color="primary">Сделать заказ</Button>
+                            <Button className="mt-3" color="primary" onClick={handleCreateOrder}>Сделать заказ</Button>
                         </div>
                     </div>
                 </div>

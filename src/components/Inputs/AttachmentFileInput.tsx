@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {Button} from "@nextui-org/react";
+'use client'
+import React, { useEffect, useState } from 'react';
+import { Button } from '@nextui-org/react';
+import axios from 'axios';
 
-interface File {
-    name: string;
-    size: number;
-    type: string;
-    file: Blob;
-}
+// interface File {
+//     name: string;
+//     size: number;
+//     type: string;
+//     file: Blob;
+// }
 
 interface AttachmentsFileInputProps {
     downloadFilesCallback: (filesDownload: boolean) => void;
@@ -15,19 +17,41 @@ interface AttachmentsFileInputProps {
 export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
     const [files, setFiles] = useState<File[]>([]);
     const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newFiles: File[] = Array.from(e.target.files || []).map((file) => ({
-            name: file.name,
-            size: file.size,
-            type: file.type,
-            file: file,
-        }));
+        const newFiles = Array.from(e.target.files || [])
         setFiles((prevFiles) => [...prevFiles, ...newFiles]);
 
-        const newPreviewUrls = newFiles.map((file) => URL.createObjectURL(file.file));
+        const newPreviewUrls = newFiles.map((file) => URL.createObjectURL(file));
         setPreviewUrls((prevUrls) => [...prevUrls, ...newPreviewUrls]);
     };
+
+    const sendFiles = async (e: React.FocusEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (files.length) {
+            props.downloadFilesCallback(true);
+        } else {
+            props.downloadFilesCallback(false);
+        }
+        if (!files || files.length === 0) return
+        try {
+            const data = new FormData()
+            for (const file of files) {
+                data.append(file.name, file)
+            }
+
+            const res = await fetch('/api/upload', {
+                method: 'POST',
+                body: data
+            })
+            if (!res.ok) throw new Error(await res.text())
+        } catch (e: any) {
+            console.error(e)
+        }
+    }
+
 
     const handleRemoveFile = (index: number) => {
         const newFiles = [...files];
@@ -39,15 +63,13 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
         setPreviewUrls(newPreviewUrls);
     };
 
-    useEffect(() => {
-        if(files.length){
-            props.downloadFilesCallback(true)
-        } else {
-            props.downloadFilesCallback(false)
-        }
-    }, [files]);
+    const handleCancel = () => {
+        setFiles([]);
+        setPreviewUrls([]);
+    };
+
     return (
-        <div>
+        <form onSubmit={sendFiles}>
             <label className='mb-[10px] block text-base font-medium text-dark dark:text-white'>
                 Загрузи свою хуйню
             </label>
@@ -65,8 +87,7 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
                             multiple
                             onChange={handleFileChange}
                         />
-                        <span
-                            className='mx-auto mb-3 flex h-[50px] w-[50px] items-center justify-center rounded-full border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2'>
+                        <span className='mx-auto mb-3 flex h-[50px] w-[50px] items-center justify-center rounded-full border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2'>
               <svg
                   width='20'
                   height='20'
@@ -100,38 +121,48 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
             </span>
                     </div>
                 </label>
-                {files.length > 0 && (
-                    <>
-                        <div className='mt-4 grid grid-cols-3 gap-4'>
-                            {files.map((file, index) => (
-                                <div key={index} className='relative'>
-                                    <img src={previewUrls[index]} alt={`Предпросмотр файла ${index}`}
-                                         className='max-w-full'/>
-                                    <button
-                                        className='absolute top-2 right-2 bg-white rounded-full p-2 hover:bg-gray-200'
-                                        onClick={() => handleRemoveFile(index)}
-                                    >
-                                        <svg
-                                            xmlns='http://www.w3.org/2000/svg'
-                                            className='h-4 w-4 text-gray-600'
-                                            fill='none'
-                                            viewBox='0 0 24 24'
-                                            stroke='currentColor'
-                                        >
-                                            <path
-                                                strokeLinecap='round'
-                                                strokeLinejoin='round'
-                                                strokeWidth={2}
-                                                d='M6 18L18 6M6 6l12 12'
-                                            />
-                                        </svg>
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    </>
-                )}
             </div>
-        </div>
+            {error && <div className='text-red-500 mt-2'>{error}</div>}
+            {files.length > 0 && (
+                <div className='mt-4'>
+                    <h3 className='text-lg font-medium mb-2'>Загружаемые файлы:</h3>
+                    <div className='grid grid-cols-3 gap-4'>
+                        {files.map((file, index) => (
+                            <div key={index} className='relative'>
+                                <img
+                                    src={previewUrls[index]}
+                                    alt={`Предпросмотр файла ${index}`}
+                                    className='max-w-full'
+                                />
+                                <div className='mt-2'>
+                                    <p className='text-sm font-medium'>{file.name}</p>
+                                    <p className='text-sm text-gray-500'>{file.size} bytes</p>
+                                </div>
+                                <button
+                                    className='absolute top-2 right-2 bg-white rounded-full p-2 hover:bg-gray-200'
+                                    onClick={() => handleRemoveFile(index)}
+                                >
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        className='h-4 w-4 text-gray-600'
+                                        fill='none'
+                                        viewBox='0 0 24 24'
+                                        stroke='currentColor'
+                                    >
+                                        <path
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                            strokeWidth={2}
+                                            d='M6 18L18 6M6 6l12 12'
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                    <Button type="submit">Загрузить</Button>
+                </div>
+            )}
+        </form>
     );
 };

@@ -13,6 +13,8 @@
 /.next/
 /out/
 
+/user-files
+
 # production
 /build
 
