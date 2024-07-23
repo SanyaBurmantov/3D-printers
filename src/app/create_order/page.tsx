@@ -82,38 +82,44 @@ const Page = () => {
 
     };
 
-    const handleCreateOrder = () => {
-        console.log({
-            "нужно сканирование": needScan,
-            "нужно моделирование": needModel,
-            "нужна печать": needPrint,
-            "габариты": gabarit,
-            "технология": selectedTechnology.values().next().value,
-            "материал": selectedMaterial.values().next().value,
-            "колличество": count,
-            "нагрузки": pressure,
-            "использование": uses,
-            "коммент": comment,
-            "номер телефона": number,
-            "почта": mail,
-            "фио": fio,
-            "организация": org,
+    const handleCreateOrder = (e: any) => {
+        e.preventDefault()
+
+        if (mail === "" || fio === "" || number === "") {
+            return null
+        }
+
+        fetch(`/api/send`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "нужно сканирование": needScan,
+                "нужно моделирование": needModel,
+                "нужна печать": needPrint,
+                "габариты": gabarit,
+                "технология": selectedTechnology.values().next().value,
+                "материал": selectedMaterial.values().next().value,
+                "колличество": count,
+                "нагрузки": pressure,
+                "использование": uses,
+                "коммент": comment,
+                "номер телефона": number,
+                "почта": mail,
+                "фио": fio,
+                "организация": org,
+            })
         })
+            .then(r => r.json())
+            .then(d => {
+                if (d?.ok) {
+                    // setIsSended(true)
+                }
+            })
+            .catch(e => console.log(e.message))
         return {
-            "нужно сканирование": needScan,
-            "нужно моделирование": needModel,
-            "нужна печать": needPrint,
-            "габариты": gabarit,
-            "технология": selectedTechnology.values().next().value,
-            "материал": selectedMaterial.values().next().value,
-            "колличество": count,
-            "нагрузки": pressure,
-            "использование": uses,
-            "коммент": comment,
-            "номер телефона": number,
-            "почта": mail,
-            "фио": fio,
-            "организация": org,
+
         }
 
     }
