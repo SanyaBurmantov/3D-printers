@@ -8,9 +8,9 @@ const config: Config = {
     "./src/**/*.{js,jsx,ts,tsx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: undefined,
+  darkMode: 'selector',
   corePlugins: {
-    backgroundColor: false,
+
   },
   theme: {
 
