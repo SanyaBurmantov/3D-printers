@@ -9,6 +9,9 @@ const config: Config = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: undefined,
+  corePlugins: {
+    backgroundColor: false,
+  },
   theme: {
 
     extend: {
