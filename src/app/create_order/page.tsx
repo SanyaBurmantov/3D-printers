@@ -4,7 +4,7 @@ import {Checkbox} from "@nextui-org/checkbox";
 import {AttachmentsFileInput} from "@/components/Inputs/AttachmentFileInput";
 import {Input, Textarea} from "@nextui-org/input";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@nextui-org/dropdown";
-import {Button} from "@nextui-org/react";
+import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure} from "@nextui-org/react";
 
 const Page = () => {
     const [needScan, setNeedScan] = React.useState(false);
@@ -18,12 +18,14 @@ const Page = () => {
     const [gabarit, setGabarit] = React.useState('');
     const [pressure, setPressure] = React.useState('');
     const [uses, setUses] = React.useState('');
-    const [count, setCount] = React.useState(0);
+    const [count, setCount] = React.useState('');
     const [comment, setComment] = React.useState('');
     const [number, setNumber] = React.useState('');
     const [mail, setMail] = React.useState('');
     const [fio, setFio] = React.useState('');
     const [org, setOrg] = React.useState('');
+
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     const handleNeedScan = (isSelected: boolean) => {
         setNeedScan(isSelected)
@@ -69,6 +71,16 @@ const Page = () => {
         setNumber(value);
     };
 
+    const validateNumber = (value: string) => {
+       return value.length > 7
+    };
+
+    const isInvalidNumber = React.useMemo(() => {
+        if (number === "") return false;
+
+        return validateNumber(number) ? false : true;
+    }, [number]);
+
     const handleSelectMail = (value: any) => {
         setMail(value);
     };
@@ -77,12 +89,19 @@ const Page = () => {
         setFio(value);
     };
 
+    const isInvalidFio = React.useMemo(() => {
+        if (fio === "") return false;
+
+        return validateNumber(fio) ? false : true;
+    }, [fio]);
+
     const handleSelectOrg = (value: any) => {
         setOrg(value);
 
     };
 
     const handleCreateOrder = (e: any) => {
+        onOpen()
         e.preventDefault()
 
         if (mail === "" || fio === "" || number === "") {
@@ -304,7 +323,7 @@ const Page = () => {
                                                 <td className="w-1/4 font-medium">Нагрузки</td>
                                                 <td className="w-3/4">
                                                     <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                        <Input placeholder="Укажите нагрузки" labelPlacement="outside-left" onValueChange={handleSelectPreasure}/>
+                                                        <Input placeholder="Укажите нагрузки" labelPlacement="outside-left" value={pressure} onValueChange={handleSelectPreasure}/>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -312,7 +331,7 @@ const Page = () => {
                                                 <td className="w-1/4 font-medium">Условия эксплуатации</td>
                                                 <td className="w-3/4">
                                                     <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                        <Input placeholder="Опишите условия эксплуатации" onValueChange={handleSelectUses}
+                                                        <Input placeholder="Опишите условия эксплуатации" value={uses} onValueChange={handleSelectUses}
                                                                labelPlacement="outside-left"/>
                                                     </div>
                                                 </td>
@@ -323,7 +342,7 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Количество</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Введите количество" labelPlacement="outside-left" onValueChange={handleSelectCount}/>
+                                                <Input placeholder="Введите количество" labelPlacement="outside-left" value={count} onValueChange={handleSelectCount}/>
                                             </div>
                                         </td>
                                     </tr>
@@ -331,7 +350,7 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Комментарий</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Textarea placeholder="Ваш комментарий" className="max-w-xs" onValueChange={handleSelectComment}/>
+                                                <Textarea placeholder="Ваш комментарий" value={comment} className="max-w-xs" onValueChange={handleSelectComment}/>
                                             </div>
                                         </td>
                                     </tr>
@@ -339,8 +358,16 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Номер</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Контактный телефон" labelPlacement="outside-left"
-                                                       required={true} onValueChange={handleSelectNumber}/>
+                                                <Input
+                                                    placeholder="Контактный телефон"
+                                                    type="number"
+                                                    labelPlacement="outside-left"
+                                                    isRequired
+                                                    isInvalid={isInvalidNumber}
+                                                    onValueChange={handleSelectNumber}
+                                                    errorMessage="Пожалуйста, введите номер телефона"
+                                                    value={number}
+                                                />
                                             </div>
                                         </td>
                                     </tr>
@@ -348,7 +375,7 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Почта</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Ваша почта" labelPlacement="outside-left" onValueChange={handleSelectMail}/>
+                                                <Input placeholder="Ваша почта" labelPlacement="outside-left" value={mail} onValueChange={handleSelectMail}/>
                                             </div>
                                         </td>
                                     </tr>
@@ -356,7 +383,15 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Ваши ФИО</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="ФИО" labelPlacement="outside-left" required={true} onValueChange={handleSelectFio}/>
+                                                <Input
+                                                    placeholder="ФИО"
+                                                    labelPlacement="outside-left"
+                                                    isRequired
+                                                    onValueChange={handleSelectFio}
+                                                    isInvalid={isInvalidFio}
+                                                    errorMessage="Пожалуйста, представьтесь"
+                                                    value={fio}
+                                                />
                                             </div>
                                         </td>
                                     </tr>
@@ -364,19 +399,42 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Организация</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Ваша организация" labelPlacement="outside-left" onValueChange={handleSelectOrg}/>
+                                                <Input placeholder="Ваша организация" labelPlacement="outside-left" value={org} onValueChange={handleSelectOrg}/>
                                             </div>
                                         </td>
                                     </tr>
                                 </>
                             )}
                         </table>
-                        <div>
+                        {!isInvalidFio && !isInvalidNumber && (<div>
                             <Button className="mt-3" color="primary" onClick={handleCreateOrder}>Сделать заказ</Button>
-                        </div>
+                        </div>)}
                     </div>
                 </div>
             </section>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+                            <ModalBody>
+                                <p>
+                                    Жди звонка, мы тебя найдем!
+                                </p>
+
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="danger" variant="light" onPress={onClose}>
+                                    Close
+                                </Button>
+                                <Button color="primary" onPress={onClose}>
+                                    Action
+                                </Button>
+                            </ModalFooter>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
         </>
     );
 };

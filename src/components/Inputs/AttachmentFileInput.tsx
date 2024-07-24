@@ -68,6 +68,12 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
         setPreviewUrls([]);
     };
 
+    useEffect(() => {
+        if(files.length>0){
+            props.downloadFilesCallback( true)
+        } else  props.downloadFilesCallback( false)
+    }, [files]);
+
     return (
         <form onSubmit={sendFiles}>
             <label className='mb-[10px] block text-base font-medium text-dark dark:text-white'>
@@ -126,7 +132,7 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
             {files.length > 0 && (
                 <div className='mt-4'>
                     <h3 className='text-lg font-medium mb-2'>Загружаемые файлы:</h3>
-                    <div className='grid grid-cols-3 gap-4'>
+                    <div className='grid grid-cols-4 gap-4'>
                         {files.map((file, index) => (
                             <div key={index} className='relative'>
                                 <img
@@ -160,7 +166,6 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
                             </div>
                         ))}
                     </div>
-                    <Button type="submit">Загрузить</Button>
                 </div>
             )}
         </form>
