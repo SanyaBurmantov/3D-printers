@@ -89,10 +89,14 @@ const Page = () => {
         setFio(value);
     };
 
+    const validateFio = (value: string) => {
+        return value.length > 1
+    };
+
     const isInvalidFio = React.useMemo(() => {
         if (fio === "") return false;
 
-        return validateNumber(fio) ? false : true;
+        return validateFio(fio) ? false : true;
     }, [fio]);
 
     const handleSelectOrg = (value: any) => {
