@@ -1,5 +1,5 @@
 import React from 'react';
-import ScrollBtn from "@/components/UI/ScrollBtn";
+import ScrollBtn from "../components/UI/ScrollBtn";
 
 const GetStarted = () => {
     return (
