@@ -1,7 +1,7 @@
 import Image from "next/image";
-import GetStarted from "@/components/GetStarted";
-import OurFeatures from "@/components/OurFeauters";
-import ContactUs from "@/components/ContactUs";
+import GetStarted from "../components/GetStarted";
+import OurFeatures from "../components/OurFeauters";
+import ContactUs from "../components/ContactUs";
 import React from "react";
 import {NextUIProvider} from "@nextui-org/react";
 
