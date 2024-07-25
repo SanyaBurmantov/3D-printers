@@ -1,7 +1,7 @@
 'use client'
 import React, {useEffect} from 'react';
 import {Checkbox} from "@nextui-org/checkbox";
-import {AttachmentsFileInput} from "@/components/Inputs/AttachmentFileInput";
+import {AttachmentsFileInput} from "../../components/Inputs/AttachmentFileInput";
 import {Input, Textarea} from "@nextui-org/input";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@nextui-org/dropdown";
 import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure} from "@nextui-org/react";
