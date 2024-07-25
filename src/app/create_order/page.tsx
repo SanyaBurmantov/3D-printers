@@ -182,12 +182,10 @@ const Page = () => {
                         Заявка на расчет стоимости
                     </h2>
                     <p className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
-                        Зацени это бля! Хули ты сучка
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi asperiores atque deserunt
-                        esse est eveniet incidunt ipsam, iure minus modi nostrum quidem reprehenderit rerum veniam,
-                        vero, voluptatibus! Ab asperiores assumenda commodi error facilis fugit impedit iure laboriosam
-                        molestias mollitia perspiciatis, possimus quaerat quod similique suscipit temporibus voluptate.
-                        Dolor, quo?
+                        Добро пожаловать на страницу заказа! Здесь вы можете заказать уникальные 3D модели,
+                        которые будут напечатаны с использованием современных технологий. Мы предлагаем
+                        широкий выбор материалов и цветов для вашей 3D печати. Пожалуйста, заполните форму
+                        ниже, чтобы разместить свой заказ.
                     </p>
                     <p className="mb-3 text-base leading-relaxed dark:text-dark-6">
                         Мне нужно:

@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalTest from "@/components/UI/ModalTest";
+import ScrollBtn from "@/components/UI/ScrollBtn";
 
 const GetStarted = () => {
     return (
@@ -13,55 +13,46 @@ const GetStarted = () => {
                             <h1
                                 className="mb-5 text-4xl font-bold !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl"
                             >
-                                Мы... <br/>
-                                Делаем... <br/>
-                                3D-печать, нахуй..
+                                Добро пожаловать <br/>
+                                в SparxLab.by
                             </h1>
                             <p
                                 className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6"
                             >
-                                Мы самые пиздатые в этой стране а все остальные печатники нам завидуют. Если вы хейтер -
-                                идите нахуй и впизду.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt explicabo odit
-                                perferendis provident sequi? Aperiam aut, culpa cupiditate id iste magni maxime nemo
-                                nulla officia pariatur placeat porro quae, repellat!
+                                Мы — эксперты в моделировании, сканировании и 3D печати. Наша команда использует
+                                передовые технологии для создания высококачественных прототипов и деталей,
+                                соответствующих строгим стандартам. Мы предлагаем индивидуальные решения для каждого
+                                клиента, от малого бизнеса до крупных корпораций. Наша цель — помочь вам реализовать
+                                идеи и превратить их в реальность. Исследуйте наш сайт, чтобы узнать больше о наших
+                                услугах и проектах. Свяжитесь с нами, и давайте создадим что-то удивительное вместе!
                             </p>
-                            <ul className="flex flex-wrap items-center">
-                                <li>
-                                    <a
-                                        href="javascript:void(0)"
-                                        className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-blue-dark lg:px-7"
-                                    >
-                                        Погнали нахуй
-                                    </a>
-                                </li>
-                            </ul>
+                            <ScrollBtn />
                             <div className="clients pt-16">
                                 <h6
                                     className="flex items-center mb-6 text-xs font-normal text-body-color dark:text-dark-6"
                                 >
-                                    Some Of Our Clients
+                                    Наши клиенты
                                     <span className="inline-block w-8 h-px ml-3 bg-body-color"></span>
                                 </h6>
                                 <div className="flex items-center gap-4 xl:gap-[50px]">
-                                    <a href="javascript:void(0)" className="block py-3">
+                                    <p className="block py-3">
                                         <img
                                             src="https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg"
                                             alt="oracle"
                                         />
-                                    </a>
-                                    <a href="javascript:void(0)" className="block py-3">
+                                    </p>
+                                    <p className="block py-3">
                                         <img
                                             src="https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg"
                                             alt="intel"
                                         />
-                                    </a>
-                                    <a href="javascript:void(0)" className="block py-3">
+                                    </p>
+                                    <p className="block py-3">
                                         <img
                                             src="https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg"
                                             alt="logitech"
                                         />
-                                    </a>
+                                    </p>
                                 </div>
                             </div>
                         </div>

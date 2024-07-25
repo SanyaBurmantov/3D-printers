@@ -2,6 +2,7 @@ import React from "react";
 import {router} from "next/client";
 import {Router} from "next/router";
 import Link from "next/link";
+
 export interface IServiceCard {
     icon: any,
     title: string,
@@ -9,6 +10,7 @@ export interface IServiceCard {
     route
         : string,
 }
+
 const OurFeatures = () => {
     return (
         <section className="pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
@@ -17,10 +19,11 @@ const OurFeatures = () => {
                     <div className="w-full px-4">
                         <div className="mx-auto mb-12 max-w-[510px] text-center lg:mb-20">
                             <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
-                                А что мы вообще можем?
+                                Что мы умеем?
                             </h2>
                             <p className="text-base text-body-color dark:text-dark-6">
-                                Да все что хочешь сука ебана, вот тебе 4 варианта на выбор нах, смотри и обтекай!
+                                В нашей компании мы используем самые современные технологии 3D печати, чтобы
+                                гарантировать высокое качество и точность изделий. Вот некоторые из них:
                             </p>
                         </div>
                     </div>
@@ -29,8 +32,8 @@ const OurFeatures = () => {
                 <div className="-mx-4 flex flex-wrap">
                     <ServiceCard
                         route={'/fdm_fff'}
-                        title="FDM/FFF"
-                        details="Можем такую поебень"
+                        title="FDM (Fused Deposition Modeling)/FFF"
+                        details="FDM — это метод послойного нанесения расплавленного пластика, который идеально подходит для прототипирования и создания функциональных деталей. Эта технология обеспечивает доступность и простоту в использовании, позволяя быстро получать изделия с хорошими механическими свойствами."
                         icon={
                             <svg
                                 width="36"
@@ -48,8 +51,8 @@ const OurFeatures = () => {
                     />
                     <ServiceCard
                         route={'/sla'}
-                        title="SLA"
-                        details="А можем так, ахуеть да?"
+                        title="SLA (Stereolithography)"
+                        details="SLA использует лазер для полимеризации смолы, создавая детали с высокой детализацией и гладкой поверхностью. Эта технология подходит для ювелирных изделий и медицинских моделей, обеспечивая отличное качество и точность, что делает её популярной среди дизайнеров и инженеров."
                         icon={
                             <svg
                                 width="36"
@@ -69,8 +72,8 @@ const OurFeatures = () => {
                     />
                     <ServiceCard
                         route={'/sls'}
-                        title="SLS"
-                        details="А как тебе такое????"
+                        title="SLS (Selective Laser Sintering)"
+                        details="SLS работает на основе спекания порошковых материалов с помощью лазера, что позволяет создавать прочные и сложные детали. Эта технология идеально подходит для функциональных прототипов и малосерийного производства, обеспечивая высокую прочность и надежность изделий."
                         icon={
                             <svg
                                 width="36"
@@ -100,8 +103,8 @@ const OurFeatures = () => {
                     />
                     <ServiceCard
                         route={'/slm'}
-                        title="SLM"
-                        details="Как же сильны наши принтеры, как же мы пиздаты!"
+                        title="SLM (Selective Laser Melting)"
+                        details="SLM использует лазер для плавления металлического порошка, создавая детали с высокой прочностью и сложной геометрией. Эта технология применяется в аэрокосмической и медицинской отраслях, обеспечивая отличное качество и минимальные отходы в процессе производства."
                         icon={
                             <svg
                                 width="36"
@@ -129,20 +132,21 @@ const OurFeatures = () => {
 
 export default OurFeatures;
 
-const ServiceCard = ({ icon, title, details, route }: IServiceCard) => {
+const ServiceCard = ({icon, title, details, route}: IServiceCard) => {
     return (
         <>
             <div className="w-full px-4 md:w-1/2 lg:w-1/2">
-                <Link href={route} >
-                <div className="mb-9 rounded-[20px] bg-white p-10 shadow-2 hover:shadow-lg dark:bg-dark-2 md:px-7 xl:px-10">
-                    <div className="mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-2xl bg-primary">
-                        {icon}
+                <Link href={route}>
+                    <div
+                        className="mb-9 rounded-[20px] bg-white p-10 shadow-2 hover:shadow-lg dark:bg-dark-2 md:px-7 xl:px-10">
+                        <div className="mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-2xl bg-primary">
+                            {icon}
+                        </div>
+                        <h4 className="mb-[14px] text-2xl font-semibold text-dark dark:text-white">
+                            {title}
+                        </h4>
+                        <p className="text-body-color dark:text-dark-6">{details}</p>
                     </div>
-                    <h4 className="mb-[14px] text-2xl font-semibold text-dark dark:text-white">
-                        {title}
-                    </h4>
-                    <p className="text-body-color dark:text-dark-6">{details}</p>
-                </div>
                 </Link>
             </div>
         </>

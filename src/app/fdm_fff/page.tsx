@@ -1,84 +1,99 @@
-'use client'
 import React from 'react';
 import Link from "next/link";
-import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure} from "@nextui-org/react";
+import BreadCrumb from "@/components/UI/BreadCrumb";
 
 const Page = () => {
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
     return (
         <>
+            <div>
+                <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[80px]">
+                    <div className="container">
 
-        <div>
-            <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]">
-                <div className="container">
+                        <div className="-mx-4 flex flex-wrap lg:justify-between">
+                            <div className="w-full px-4 lg:w-2/3 xl:w-2/3">
+                                <div className="mb-12 max-w-[570px] lg:mb-0">
+                                    <BreadCrumb name={'FDM'}/>
+                                    <div className="max-w-2xl mx-auto p-6">
+                                        <h1 className="mb-6 text-[32px] font-bold uppercase text-dark dark:text-white sm:text-[40px] lg:text-[36px] xl:text-[40px]">
+                                            Технология печати FDM/FFF
+                                        </h1>
+                                        <h2 className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
+                                            FDM (Fused Deposition Modeling) и FFF (Fused Filament Fabrication) — это
+                                            популярные технологии 3D-печати, которые основаны на послойном нанесении
+                                            расплавленного термопластика. Эти методы широко используются как в
+                                            промышленности, так и в любительских проектах благодаря своей доступности и
+                                            простоте.
+                                        </h2>
 
-                    <div className="-mx-4 flex flex-wrap lg:justify-between">
-                        <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
-                            <div className="mb-12 max-w-[570px] lg:mb-0">
+                                        <h2 className="mb-4 text-lg font-semibold text-dark dark:text-white">Принцип
+                                            работы</h2>
+                                        <ol className="list-decimal list-inside mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
+                                            <li className="mb-2">Подготовка модели: 3D-модель создается с помощью
+                                                CAD-программ и затем экспортируется в формат, совместимый с 3D-принтером
+                                                (обычно STL).
+                                            </li>
+                                            <li className="mb-2">Расплавление материала: Нагревательный элемент принтера
+                                                расплавляет термопластический филамент, который подается через
+                                                экструдер.
+                                            </li>
+                                            <li className="mb-2">Нанесение слоев: Расплавленный материал наносится на
+                                                платформу в виде тонких слоев, постепенно формируя объект. Каждый слой
+                                                охлаждается и затвердевает, что позволяет создавать сложные
+                                                геометрические формы.
+                                            </li>
+                                            <li>Завершение печати: После завершения процесса печати объект извлекается
+                                                из принтера и может потребовать дополнительной обработки, такой как
+                                                удаление поддержек или шлифовка.
+                                            </li>
+                                        </ol>
 
-                                <h2 className="mb-6 text-[32px] font-bold uppercase text-dark dark:text-white sm:text-[40px] lg:text-[36px] xl:text-[40px]">
-                                    FFF/FDM
-                                </h2>
-                                <p className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
-                                    Зацени это бля! Хули ты сучка
-                                </p>
-                                <Link href={'/'}
-                                      className="mb-9 bg-dark dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-md inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:border-body-color disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
+                                        <h2 className="mb-4 text-lg font-semibold text-dark dark:text-white">Преимущества
+                                            и недостатки</h2>
+
+                                        <h3 className="mb-2 text-base font-semibold text-dark dark:text-white">Преимущества:</h3>
+                                        <ul className="list-disc list-inside mb-4 text-base leading-relaxed text-body-color dark:text-dark-6">
+                                            <li className="mb-2">Доступность: Принтеры FDM/FFF относительно недороги и
+                                                доступны для широкой аудитории.
+                                            </li>
+                                            <li className="mb-2">Разнообразие материалов: Поддержка различных
+                                                термопластиков, таких как PLA, ABS, PETG и других.
+                                            </li>
+                                            <li>Простота использования: Легкость в настройке и эксплуатации.</li>
+                                        </ul>
+
+                                        <h3 className="mb-2 text-base font-semibold text-dark dark:text-white">Недостатки:</h3>
+                                        <ul className="list-disc list-inside mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
+                                            <li className="mb-2">Качество печати: Ограничения в точности и детализации
+                                                по сравнению с другими технологиями, такими как SLA.
+                                            </li>
+                                            <li className="mb-2">Скорость: Процесс может занимать значительное время,
+                                                особенно для крупных объектов.
+                                            </li>
+                                            <li>Свойства материала: Некоторые термопласты могут быть менее прочными или
+                                                устойчивыми к температуре.
+                                            </li>
+                                        </ul>
+
+                                        <h2 className="mb-4 text-lg font-semibold text-dark dark:text-white">Заключение</h2>
+                                        <p className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
+                                            Технология FDM/FFF является одним из самых распространенных методов
+                                            3D-печати благодаря своей доступности и простоте. Она подходит как для
+                                            начинающих, так и для опытных пользователей, предоставляя возможность
+                                            создавать разнообразные объекты для различных целей.
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <Link href={'/create_order'}
+                                      className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-blue-dark lg:px-7"
                                 >
-                                    Пиздец, назад
+                                    Оставить заявку
                                 </Link>
-
-                                <p className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores aut
-                                    cumque deleniti doloremque incidunt laboriosam, laudantium, magni modi nesciunt
-                                    nihil, nulla quo ratione sit ullam? Animi aperiam assumenda commodi consequatur,
-                                    debitis dolor dolore dolorem eos et excepturi laborum molestias non numquam odit
-                                    omnis quasi quia repudiandae saepe, sit voluptatem!
-                                </p>
                             </div>
-                            <Link href={'/create_order'}
-                                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-blue-dark lg:px-7"
-                            >
-                                Дайте два блять
-                            </Link>
                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
-            <Modal
-                isOpen={isOpen}
-                placement={'center'}
-                onOpenChange={onOpenChange}
-            >
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
-                            <ModalBody>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Nullam pulvinar risus non risus hendrerit venenatis.
-                                    Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                                </p>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Nullam pulvinar risus non risus hendrerit venenatis.
-                                    Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                                </p>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button color="danger" variant="light" onPress={onClose}>
-                                    Close
-                                </Button>
-                                <Button color="primary" onPress={onClose}>
-                                    Action
-                                </Button>
-                            </ModalFooter>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
+                </section>
+            </div>
         </>
     );
 };

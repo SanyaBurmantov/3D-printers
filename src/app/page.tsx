@@ -4,7 +4,6 @@ import OurFeatures from "@/components/OurFeauters";
 import ContactUs from "@/components/ContactUs";
 import React from "react";
 import {NextUIProvider} from "@nextui-org/react";
-import ModalTest from "@/components/UI/ModalTest";
 
 export default function Home() {
   return (
