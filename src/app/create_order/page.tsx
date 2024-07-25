@@ -408,7 +408,7 @@ const Page = () => {
                                 </>
                             )}
                         </table>
-                        {!isInvalidFio && !isInvalidNumber && (<div>
+                        {!isInvalidFio && !isInvalidNumber && fio && number && (<div>
                             <Button className="mt-3" color="primary" onClick={handleCreateOrder}>Сделать заказ</Button>
                         </div>)}
                     </div>
