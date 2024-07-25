@@ -9,7 +9,7 @@ export default function Home() {
   return (
       <NextUIProvider>
           <main className="">
-
+test
             <GetStarted />
             <OurFeatures />
             <ContactUs />
