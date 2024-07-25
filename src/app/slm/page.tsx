@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from "next/link";
 import {BreadcrumbItem, Breadcrumbs} from "@nextui-org/react";
-import BreadCrumb from "@/components/UI/BreadCrumb";
+import BreadCrumb from "../../components/UI/BreadCrumb";
 
 const Page = () => {
     return (
