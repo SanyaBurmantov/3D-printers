@@ -421,7 +421,7 @@ const Page = () => {
                             <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
                             <ModalBody>
                                 <p>
-                                    Жди звонка, мы тебя найдем!
+                                    Тестовая форма
                                 </p>
 
                             </ModalBody>
