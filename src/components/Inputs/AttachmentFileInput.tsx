@@ -77,7 +77,7 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
     return (
         <form onSubmit={sendFiles}>
             <label className='mb-[10px] block text-base font-medium text-dark dark:text-white'>
-                Загрузи свою хуйню
+                Загрузите файлы
             </label>
             <div className='relative'>
                 <label
@@ -123,7 +123,7 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
             </span>
                         <span className='text-base text-body-color dark:text-dark-6'>
               Перетащи сюда свою хуйню
-              <span className='text-primary underline'> или нажми сюда </span>
+              <span className='text-primary underline'> или нажмите сюда </span>
             </span>
                     </div>
                 </label>
