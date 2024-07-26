@@ -122,8 +122,8 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
               </svg>
             </span>
                         <span className='text-base text-body-color dark:text-dark-6'>
-              Перетащи сюда свою хуйню
-              <span className='text-primary underline'> или нажмите сюда </span>
+              Перетащите файлы сюда
+              <span className='text-primary underline'> или нажмите для выбора файлов</span>
             </span>
                     </div>
                 </label>
