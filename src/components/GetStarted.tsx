@@ -4,7 +4,7 @@ import ScrollBtn from "../components/UI/ScrollBtn";
 const GetStarted = () => {
     return (
         <div
-            className="relative bg-white dark:bg-dark pt-[120px] pb-[110px] lg:pt-[150px]"
+            className="relative  bg-white dark:bg-dark pt-[120px] pb-[110px] lg:pt-[150px]"
         >
             <div className="container mx-auto">
                 <div className="flex flex-wrap items-center -mx-4">

@@ -5,8 +5,8 @@ const Header = () => {
     return (
         <div className="container mx-auto pb-2 pt-2 dark:bg-dark lg:pb-[10px] lg:pt-[10px] flex items-center justify-between">
             <Link href={'/'}>
-                <div className="w-72     h-24 overflow-hidden">
-                    <img src="./logo.png" alt="logo" className="w-full h-full object-cover"/>
+                <div className="h-12 overflow-hidden">
+                    <img src="https://sparxlab.by//logo.jpg" alt="logo" className="w-full h-full object-contain"/>
                 </div>
             </Link>
             <button
