@@ -5,6 +5,7 @@ import {AttachmentsFileInput} from "../../components/Inputs/AttachmentFileInput"
 import {Input, Textarea} from "@nextui-org/input";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@nextui-org/dropdown";
 import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure} from "@nextui-org/react";
+import {AnimatePresence, motion} from 'framer-motion';
 
 const Page = () => {
     const [needScan, setNeedScan] = React.useState(false);
@@ -12,8 +13,8 @@ const Page = () => {
     const [needPrint, setNeedPrint] = React.useState(false);
     const [needHelp, setNeedHelp] = React.useState(false);
     const [filesDownload, setFilesDownload] = React.useState(false);
-    const [selectedTechnology, setSelectedTechnology] = React.useState(new Set(["FDM/FFF"]));
-    const [selectedMaterial, setSelectedMaterial] = React.useState(new Set(["FLEX"]));
+    const [selectedTechnology, setSelectedTechnology] = React.useState(new Set([]));
+    const [selectedMaterial, setSelectedMaterial] = React.useState(new Set([]));
     const [selectedSomething, setSelectedSomething] = React.useState(false)
     const [gabarit, setGabarit] = React.useState('');
     const [pressure, setPressure] = React.useState('');
@@ -72,7 +73,7 @@ const Page = () => {
     };
 
     const validateNumber = (value: string) => {
-       return value.length > 7
+        return value.length > 7
     };
 
     const isInvalidNumber = React.useMemo(() => {
@@ -141,9 +142,7 @@ const Page = () => {
                 }
             })
             .catch(e => console.log(e.message))
-        return {
-
-        }
+        return {}
 
     }
 
@@ -156,6 +155,13 @@ const Page = () => {
         [selectedMaterial]
     );
 
+    const disableForm = () => {
+        if (!isInvalidFio && !isInvalidNumber && !fio && !number)
+            return true
+        return isInvalidFio && isInvalidNumber && !fio && !number
+    }
+
+
     useEffect(() => {
         if (needPrint) {
             setSelectedSomething(true)
@@ -167,7 +173,8 @@ const Page = () => {
     }, [needPrint, needScan, needModel]);
 
     useEffect(() => {
-        if(selectedMaterial.has("Мне нужна помощь")){
+        // @ts-ignore
+        if (selectedMaterial.has("Мне нужна помощь")) {
             setNeedHelp(true)
         } else {
             setNeedHelp(false)
@@ -201,38 +208,44 @@ const Page = () => {
                         </>
                     )}
                     <div className="flex flex-col gap-4 mt-6">
+
                         <table className="w-full border-collapse">
                             {filesDownload && needScan && (
-                                <tr className="border-b border-gray-300 pb-4 mb-4">
+                                <motion.tr
+                                    initial={{opacity: 0, y: -20}}
+                                    animate={{opacity: 1, y: 0}}
+                                    transition={{duration: 0.5}}
+                                    className="border-b border-gray-300 pb-4 mb-4"
+                                >
                                     <td className="w-1/4 font-medium">Габариты</td>
                                     <td className="w-3/4">
-                                        <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                            <Input
-                                                type="number"
-                                                placeholder="0"
-                                                labelPlacement="outside-left"
-                                                endContent={
-                                                    <div className="pointer-events-none flex items-center">
-                                                        <span className="text-default-400 text-small">мм</span>
-                                                    </div>
-                                                }
-                                                onValueChange={handleSelectGabarit}
-                                            />
+                                        <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3 w-fit">
+                                            <Input type="number" placeholder="Высота" labelPlacement="outside-left"
+                                                   onValueChange={handleSelectGabarit}/>
+                                            <Input type="number" placeholder="Длина" labelPlacement="outside-left"
+                                                   onValueChange={handleSelectGabarit}/>
+                                            <Input type="number" placeholder="Ширина" labelPlacement="outside-left"
+                                                   onValueChange={handleSelectGabarit}/>
+                                            <div className="pointer-events-none flex items-center">
+                                                <span className="text-default-400 text-small">мм</span>
+                                            </div>
                                         </div>
                                     </td>
-                                </tr>
+                                </motion.tr>
                             )}
                             {filesDownload && (
                                 <>
-                                    <tr className="border-b border-gray-300 pb-4 mb-4">
+                                    <motion.tr
+                                        initial={{opacity: 0, y: -20}}
+                                        animate={{opacity: 1, y: 0}}
+                                        transition={{duration: 0.5}}
+                                        className="border-b border-gray-300 pb-4 mb-4"
+                                    >
                                         <td className="w-1/4 font-medium">Технология печати</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
                                                 <Dropdown>
                                                     <DropdownTrigger>
-                                                        {/*<Button variant="bordered" className="capitalize">*/}
-                                                        {/*    {selectedTechValue}*/}
-                                                        {/*</Button>*/}
                                                         <div
                                                             className="flex flex-wrap md:flex-nowrap gap-4 items-center">
                                                             <Input
@@ -242,12 +255,11 @@ const Page = () => {
                                                                     <div
                                                                         className="pointer-events-none flex items-center">
                                                                         <span
-                                                                            className="text-default-400 text-small">
-                                                                               ▼
-                                                                        </span>
+                                                                            className="text-default-400 text-small">▼</span>
                                                                     </div>
                                                                 }
                                                                 value={selectedTechValue}
+                                                                placeholder={'Выберите технологию'}
                                                             />
                                                         </div>
                                                     </DropdownTrigger>
@@ -267,16 +279,19 @@ const Page = () => {
                                                 </Dropdown>
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr className="border-b border-gray-300 pb-4 mb-4">
+                                    </motion.tr>
+
+                                    <motion.tr
+                                        initial={{opacity: 0, y: -20}}
+                                        animate={{opacity: 1, y: 0}}
+                                        transition={{duration: 0.5}}
+                                        className="border-b border-gray-300 pb-4 mb-4"
+                                    >
                                         <td className="w-1/4 font-medium">Материал печати</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
                                                 <Dropdown>
                                                     <DropdownTrigger>
-                                                        {/*<Button variant="bordered" className="capitalize">*/}
-                                                        {/*    {selectedMaterialValue}*/}
-                                                        {/*</Button>*/}
                                                         <div
                                                             className="flex flex-wrap md:flex-nowrap gap-4 items-center">
                                                             <Input
@@ -286,12 +301,11 @@ const Page = () => {
                                                                     <div
                                                                         className="pointer-events-none flex items-center">
                                                                         <span
-                                                                            className="text-default-400 text-small">
-                                                                               ▼
-                                                                        </span>
+                                                                            className="text-default-400 text-small">▼</span>
                                                                     </div>
                                                                 }
                                                                 value={selectedMaterialValue}
+                                                                placeholder={'Выберите материал'}
                                                             />
                                                         </div>
                                                     </DropdownTrigger>
@@ -312,105 +326,158 @@ const Page = () => {
                                                         <DropdownItem key="Polycarbonate">Polycarbonate</DropdownItem>
                                                         <DropdownItem key="ABS">ABS</DropdownItem>
                                                         <DropdownItem key="PP">PP</DropdownItem>
-                                                        <DropdownItem key="Мне нужна помощь">Мне нужна помощь</DropdownItem>
-
+                                                        <DropdownItem key="Мне нужна помощь">Мне нужна
+                                                            помощь</DropdownItem>
                                                     </DropdownMenu>
                                                 </Dropdown>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </motion.tr>
+
                                     {needHelp && (
                                         <>
-                                            <tr className="border-b border-gray-300 pb-4 mb-4">
+                                            <motion.tr
+                                                initial={{opacity: 0, y: -20}}
+                                                animate={{opacity: 1, y: 0}}
+                                                transition={{duration: 0.5}}
+                                                className="border-b border-gray-300 pb-4 mb-4"
+                                            >
                                                 <td className="w-1/4 font-medium">Нагрузки</td>
                                                 <td className="w-3/4">
-                                                    <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                        <Input placeholder="Укажите нагрузки" labelPlacement="outside-left" value={pressure} onValueChange={handleSelectPreasure}/>
+                                                    <div
+                                                        className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
+                                                        <Input placeholder="Укажите нагрузки"
+                                                               labelPlacement="outside-left" value={pressure}
+                                                               onValueChange={handleSelectPreasure}/>
                                                     </div>
                                                 </td>
-                                            </tr>
-                                            <tr className="border-b border-gray-300 pb-4 mb-4">
+                                            </motion.tr>
+                                            <motion.tr
+                                                initial={{opacity: 0, y: -20}}
+                                                animate={{opacity: 1, y: 0}}
+                                                transition={{duration: 0.5}}
+                                                className="border-b border-gray-300 pb-4 mb-4"
+                                            >
                                                 <td className="w-1/4 font-medium">Условия эксплуатации</td>
                                                 <td className="w-3/4">
-                                                    <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                        <Input placeholder="Опишите условия эксплуатации" value={uses} onValueChange={handleSelectUses}
+                                                    <div
+                                                        className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
+                                                        <Input placeholder="Опишите условия эксплуатации" value={uses}
+                                                               onValueChange={handleSelectUses}
                                                                labelPlacement="outside-left"/>
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </motion.tr>
                                         </>
                                     )}
-                                    <tr className="border-b border-gray-300 pb-4 mb-4">
+
+                                    <motion.tr
+                                        initial={{opacity: 0, y: -20}}
+                                        animate={{opacity: 1, y: 0}}
+                                        transition={{duration: 0.5}}
+                                        className="border-b border-gray-300 pb-4 mb-4"
+                                    >
                                         <td className="w-1/4 font-medium">Количество</td>
                                         <td className="w-3/4">
-                                            <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Введите количество" labelPlacement="outside-left" value={count} onValueChange={handleSelectCount}/>
+                                            <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3 w-fit">
+                                                <Input placeholder="Введите количество"
+                                                       value={count} onValueChange={handleSelectCount} />
+
+                                                <div className="pointer-events-none flex items-center">
+                                                    <span className="text-default-400 text-small">шт</span>
+                                                </div>
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr className="border-b border-gray-300 pb-4 mb-4">
+                                    </motion.tr>
+
+                                    <motion.tr
+                                        initial={{opacity: 0, y: -20}}
+                                        animate={{opacity: 1, y: 0}}
+                                        transition={{duration: 0.5}}
+                                        className="border-b border-gray-300 pb-4 mb-4"
+                                    >
                                         <td className="w-1/4 font-medium">Комментарий</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Textarea placeholder="Ваш комментарий" value={comment} className="max-w-xs" onValueChange={handleSelectComment}/>
+                                                <Textarea placeholder="Дополнительная информация о запросе"
+                                                          value={comment} className="max-w-xs"
+                                                          onValueChange={handleSelectComment}/>
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr className="border-b border-gray-300 pb-4 mb-4">
-                                        <td className="w-1/4 font-medium">Номер</td>
+                                    </motion.tr>
+
+                                    <motion.tr
+                                        initial={{opacity: 0, y: -20}}
+                                        animate={{opacity: 1, y: 0}}
+                                        transition={{duration: 0.5}}
+                                        className="border-b border-gray-300 pb-4 mb-4"
+                                    >
+                                        <td className="w-1/4 font-medium">Номер телефона</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input
-                                                    placeholder="Контактный телефон"
-                                                    type="number"
-                                                    labelPlacement="outside-left"
-                                                    isRequired
-                                                    isInvalid={isInvalidNumber}
-                                                    onValueChange={handleSelectNumber}
-                                                    errorMessage="Пожалуйста, введите номер телефона"
-                                                    value={number}
-                                                />
+                                                <Input placeholder="Контактный телефон" type="number"
+                                                       labelPlacement="outside-left" isRequired
+                                                       isInvalid={isInvalidNumber} onValueChange={handleSelectNumber}
+                                                       errorMessage="Пожалуйста, введите номер телефона"
+                                                       value={number}/>
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr className="border-b border-gray-300 pb-4 mb-4">
-                                        <td className="w-1/4 font-medium">Почта</td>
+                                    </motion.tr>
+
+                                    <motion.tr
+                                        initial={{opacity: 0, y: -20}}
+                                        animate={{opacity: 1, y: 0}}
+                                        transition={{duration: 0.5}}
+                                        className="border-b border-gray-300 pb-4 mb-4"
+                                    >
+                                        <td className="w-1/4 font-medium">Электронная почта</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Ваша почта" labelPlacement="outside-left" value={mail} onValueChange={handleSelectMail}/>
+                                                <Input placeholder="Ваша электронная почта"
+                                                       labelPlacement="outside-left" value={mail}
+                                                       onValueChange={handleSelectMail}/>
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr className="border-b border-gray-300 pb-4 mb-4">
+                                    </motion.tr>
+
+                                    <motion.tr
+                                        initial={{opacity: 0, y: -20}}
+                                        animate={{opacity: 1, y: 0}}
+                                        transition={{duration: 0.5}}
+                                        className="border-b border-gray-300 pb-4 mb-4"
+                                    >
                                         <td className="w-1/4 font-medium">Ваши ФИО</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input
-                                                    placeholder="ФИО"
-                                                    labelPlacement="outside-left"
-                                                    isRequired
-                                                    onValueChange={handleSelectFio}
-                                                    isInvalid={isInvalidFio}
-                                                    errorMessage="Пожалуйста, представьтесь"
-                                                    value={fio}
-                                                />
+                                                <Input placeholder="ФИО" labelPlacement="outside-left" isRequired
+                                                       onValueChange={handleSelectFio} isInvalid={isInvalidFio}
+                                                       errorMessage="Пожалуйста, представьтесь" value={fio}/>
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr className="pb-4">
+                                    </motion.tr>
+
+                                    <motion.tr
+                                        initial={{opacity: 0, y: -20}}
+                                        animate={{opacity: 1, y: 0}}
+                                        transition={{duration: 0.5}}
+                                        className="pb-4"
+                                    >
                                         <td className="w-1/4 font-medium">Организация</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Ваша организация" labelPlacement="outside-left" value={org} onValueChange={handleSelectOrg}/>
+                                                <Input placeholder="Ваша организация" labelPlacement="outside-left"
+                                                       value={org} onValueChange={handleSelectOrg}/>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </motion.tr>
                                 </>
                             )}
                         </table>
-                        {!isInvalidFio && !isInvalidNumber && fio && number && (<div>
-                            <Button className="mt-3" color="primary" onClick={handleCreateOrder}>Сделать заказ</Button>
-                        </div>)}
+
+                        <div>
+                            <Button className="mt-3" color="primary" isDisabled={disableForm()}
+                                    onClick={handleCreateOrder}>Сделать заказ</Button>
+                        </div>
                     </div>
                 </div>
             </section>

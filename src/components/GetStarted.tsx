@@ -14,7 +14,7 @@ const GetStarted = () => {
                                 className="mb-5 text-4xl font-bold !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl"
                             >
                                 Добро пожаловать <br/>
-                                в SparxLab.by
+                                в SPARXLAB
                             </h1>
                             <p
                                 className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6"
