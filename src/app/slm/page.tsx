@@ -2,7 +2,13 @@ import React from 'react';
 import Link from "next/link";
 import {BreadcrumbItem, Breadcrumbs} from "@nextui-org/react";
 import BreadCrumb from "../../components/UI/BreadCrumb";
-
+export async function generateStaticParams() {
+    return [
+        {
+            title: 'SPARXLAB - SLM',
+        },
+    ];
+}
 const Page = () => {
     return (
 

@@ -1,6 +1,13 @@
 import React from 'react';
 import Link from "next/link";
 import BreadCrumb from "../../components/UI/BreadCrumb";
+export async function generateStaticParams() {
+    return [
+        {
+            title: 'SPARXLAB - FDM/FFF',
+        },
+    ];
+}
 
 const Page = () => {
     return (
