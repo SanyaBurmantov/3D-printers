@@ -17,7 +17,9 @@
     display: flex;
     gap: 20px;
     align-items: center;
-
+    @media screen and (max-width: 720px){
+        display: none;
+    }
 }
 
 .navigationItem {
@@ -32,4 +34,21 @@
 .contacts{
     display: flex;
     flex-direction: column;
+    @media screen and (max-width: 720px){
+        display: none;
+    }
+}
+
+.navbar{
+    @media screen and (min-width: 720px){
+        display: none;
+        
+    }
+}
+
+.showMobile{
+    @media screen and (min-width: 720px){
+        display: none;
+
+    }
 }

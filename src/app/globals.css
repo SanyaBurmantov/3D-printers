@@ -32,3 +32,8 @@ body {
   font-style: normal;
 }
 
+.hideMobile{
+  @media screen and (min-width: 720px){
+    display: none;
+  }
+}

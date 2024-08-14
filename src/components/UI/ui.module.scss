@@ -9,3 +9,9 @@
     display: none;
   }
 }
+
+.hideMobile{
+  @media screen and (min-width: 720px){
+    display: none;
+  }
+}
