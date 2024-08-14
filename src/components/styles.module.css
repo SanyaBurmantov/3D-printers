@@ -1,0 +1,35 @@
+.image{
+
+}
+
+.logoWrapper {
+}
+
+.h2{
+
+}
+
+.h2Wrapper {
+
+}
+
+.navigation{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+}
+
+.navigationItem {
+
+}
+
+.baseHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.contacts{
+    display: flex;
+    flex-direction: column;
+}

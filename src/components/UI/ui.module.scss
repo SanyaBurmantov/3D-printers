@@ -1,0 +1,11 @@
+.helpBtn {
+  position: fixed;
+  bottom: 100px;
+  right: -12px;
+}
+
+.textPc{
+  @media screen and (max-width: 960px) {
+    display: none;
+  }
+}

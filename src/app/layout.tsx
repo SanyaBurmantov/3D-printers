@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import {bgWhite} from "next/dist/lib/picocolors";
+import HelpBtn from "@/components/UI/HelpBtn";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
           {children}
+        <HelpBtn />
       </body>
     </html>
   );

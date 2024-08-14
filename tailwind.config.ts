@@ -20,6 +20,18 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: {
+        bahnschrift: ['Bahnschrift', 'sans-serif'],
+      },
+      fontWeight: {
+        semi: "600",
+      },
+      fontStretch: {
+        condensed: 'condensed',
+      },
+      colors: {
+        primary: '#ff6600', // Замените на желаемый цвет
+      },
     },
   },
   plugins: [

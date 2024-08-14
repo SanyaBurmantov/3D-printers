@@ -1,23 +1,26 @@
 import React from 'react';
 import ScrollBtn from "../components/UI/ScrollBtn";
+import styles from './styles.module.css'
 
 const GetStarted = () => {
     return (
         <div
-            className="relative  bg-white dark:bg-dark pt-[120px] pb-[110px] lg:pt-[150px]"
+            className="relative mt-[-1px] bg-white dark:bg-dark pt-[40px] pb-[50px] lg:pt-[60px]"
         >
             <div className="container mx-auto">
                 <div className="flex flex-wrap items-center -mx-4">
                     <div className="w-full px-4 lg:w-5/12">
                         <div className="hero-content">
                             <h1
-                                className="mb-5 text-4xl font-bold !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl"
+                                className="mb-5 text-4xl font-bahnschrift font-bold font-stretch-condensed !leading-[1.208] text-dark dark:text-white sm:text-[32px] lg:text-[30px] xl:text-2xl"
                             >
-                                Добро пожаловать <br/>
-                                в SPARXLAB
+                                <div className={styles.logoWrapper}>
+                                    <img src="./1main.jpg" className="image"/>
+                                </div>
                             </h1>
+
                             <p
-                                className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6"
+                                className="mb-8 max-w-[480px] relative text-base text-body-color dark:text-dark-6"
                             >
                                 Мы — эксперты в моделировании, сканировании и 3D печати. Наша команда использует
                                 передовые технологии для создания высококачественных прототипов и деталей,
@@ -27,34 +30,7 @@ const GetStarted = () => {
                                 услугах и проектах. Свяжитесь с нами, и давайте создадим что-то удивительное вместе!
                             </p>
                             <ScrollBtn />
-                            <div className="clients pt-16">
-                                <h6
-                                    className="flex items-center mb-6 text-xs font-normal text-body-color dark:text-dark-6"
-                                >
-                                    Наши клиенты
-                                    <span className="inline-block w-8 h-px ml-3 bg-body-color"></span>
-                                </h6>
-                                <div className="flex items-center gap-4 xl:gap-[50px]">
-                                    <p className="block py-3">
-                                        <img
-                                            src="https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg"
-                                            alt="oracle"
-                                        />
-                                    </p>
-                                    <p className="block py-3">
-                                        <img
-                                            src="https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg"
-                                            alt="intel"
-                                        />
-                                    </p>
-                                    <p className="block py-3">
-                                        <img
-                                            src="https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg"
-                                            alt="logitech"
-                                        />
-                                    </p>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div className="hidden px-4 lg:block lg:w-1/12"></div>
