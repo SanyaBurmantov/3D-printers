@@ -2,6 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import {BreadcrumbItem, Breadcrumbs} from "@nextui-org/react";
 import BreadCrumb from "../../components/UI/BreadCrumb";
+import SimpleHeader from "@/components/header/SimpleHeader";
 export async function generateStaticParams() {
     return [
         {
@@ -13,6 +14,7 @@ const Page = () => {
     return (
 
         <div>
+            <SimpleHeader/>
             <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[80px]">
                 <div className="container">
                     <div className="-mx-4 flex flex-wrap lg:justify-between">

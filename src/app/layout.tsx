@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "../components/Header";
+import Header from "../components/header/Header";
 import {bgWhite} from "next/dist/lib/picocolors";
 import HelpBtn from "@/components/UI/HelpBtn";
+import { useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,11 +26,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
 
       <body className={inter.className}>
-        <Header />
+
           {children}
         <HelpBtn />
       </body>

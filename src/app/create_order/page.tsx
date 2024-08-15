@@ -1,5 +1,6 @@
 import React from 'react';
 import Order from "@/components/Order";
+import SimpleHeader from "@/components/header/SimpleHeader";
 export async function generateStaticParams() {
     return [
         {
@@ -9,7 +10,10 @@ export async function generateStaticParams() {
 }
 const Page = () => {
     return (
-        <><Order /></>
+        <>
+            <SimpleHeader/>
+            <Order />
+        </>
 
     );
 };
