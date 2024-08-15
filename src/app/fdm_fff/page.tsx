@@ -2,6 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import BreadCrumb from "../../components/UI/BreadCrumb";
 import SimpleHeader from "@/components/header/SimpleHeader";
+import Slider from "@/components/UI/Slider";
 export async function generateStaticParams() {
     return [
         {
@@ -19,7 +20,7 @@ const Page = () => {
                     <div className="container">
 
                         <div className="-mx-4 flex flex-wrap lg:justify-between">
-                            <div className="w-full px-4 lg:w-2/3 xl:w-2/3">
+                            <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
                                 <div className="mb-12 max-w-[570px] lg:mb-0">
                                     <BreadCrumb name={'FDM'}/>
                                     <div className="max-w-2xl mx-auto p-6">
@@ -98,6 +99,9 @@ const Page = () => {
                                 >
                                     Оставить заявку
                                 </Link>
+                            </div>
+                            <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
+                                <Slider/>
                             </div>
                         </div>
                     </div>

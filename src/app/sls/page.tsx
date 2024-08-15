@@ -3,6 +3,7 @@ import Link from "next/link";
 import {BreadcrumbItem, Breadcrumbs} from "@nextui-org/react";
 import BreadCrumb from "../../components/UI/BreadCrumb";
 import SimpleHeader from "@/components/header/SimpleHeader";
+import Slider from "@/components/UI/Slider";
 export async function generateStaticParams() {
     return [
         {
@@ -92,6 +93,9 @@ const Page = () => {
                             >
                                 Оставить заявку
                             </Link>
+                        </div>
+                        <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
+                            <Slider/>
                         </div>
                     </div>
                 </div>
