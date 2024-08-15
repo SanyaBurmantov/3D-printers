@@ -11,7 +11,7 @@ const SimpleHeader = () => {
     return (
         <>
             <div
-                style={{padding: '20px',  width: "100%", background: '#dadbd5'}}
+                style={{padding: '20px', position: 'fixed',  width: "100%", background: '#dadbd5'}}
                 className="z-50 mx-auto pb-2 pt-2 dark:bg-dark lg:pb-[10px] lg:pt-[10px] flex items-center justify-between shadow-md rounded-b-lg"
             >
                 <div className={styles.navbar}><NavbarHeader/></div>
