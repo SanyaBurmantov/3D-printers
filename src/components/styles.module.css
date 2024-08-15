@@ -52,3 +52,11 @@
 
     }
 }
+
+.imageSlide {
+    transition: transform 0.3s; /* Для плавного перехода */
+}
+
+.hovered {
+    transform: scale(2); /* Увеличение размера на 70% */
+}
