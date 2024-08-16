@@ -16,7 +16,7 @@ const GetStarted = () => {
                                 className="mb-5 text-4xl font-bahnschrift font-bold font-stretch-condensed !leading-[1.208] text-dark dark:text-white sm:text-[32px] lg:text-[30px] xl:text-2xl"
                             >
                                 <div className={styles.logoWrapper}>
-                                    <img src="./1main.jpg" className="image"/>
+                                    <img src="https://sparxlab.by/1main.jpg" className="image"/>
                                 </div>
                             </h1>
 
@@ -40,7 +40,7 @@ const GetStarted = () => {
                         <div className="lg:ml-auto lg:text-right">
                             <div className="relative z-10 inline-block pt-11 lg:pt-0">
                                 <Image
-                                    src="./main.jpg"
+                                    src="https://sparxlab.by/main.jpg"
                                     alt="hero"
                                     className="max-w-full lg:ml-auto"
                                     isBlurred

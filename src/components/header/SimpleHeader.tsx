@@ -18,11 +18,11 @@ const SimpleHeader = () => {
                 <div className={styles.navbar}><NavbarHeader/></div>
                 <Link href={'/'}>
                     <div className="h-12 overflow-hidden">
-                        <img src="https://sparxlab.by//logo.jpg" alt="logo"
+                        <img src="https://sparxlab.by/logo.jpg" alt="logo"
                              className="w-full h-full object-contain"/>
                     </div>
                 </Link>
-                <div className={styles.navigation}>
+                <div className="hidden md:flex md:gap-5 md:items-center ">
                     <Link className={styles.navigationItem} href="/fdm_fff">FDM/FFF</Link>
                     <Link className={styles.navigationItem} href="/sla">SLA</Link>
                     <Link className={styles.navigationItem} href="/slm">SLM</Link>

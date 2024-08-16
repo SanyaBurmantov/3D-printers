@@ -36,7 +36,7 @@ const Header = () => {
                         style={{padding: '20px', zIndex: 100000}}
             >
                 <div className={styles.navbar}><NavbarHeader/></div>
-                <div className={styles.navigation}>
+                <div className="hidden md:flex md:gap-5 md:items-center ">
                     <Link className={styles.navigationItem} href="/create_order">
                         <button
                             className="z-50 inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center bg-primary text-white rounded hover:bg-orange-600 lg:px-7">Сделать
@@ -48,8 +48,8 @@ const Header = () => {
                     <Link className={styles.navigationItem} href="/slm">SLM</Link>
                     <Link className={styles.navigationItem} href="/sls">SLS</Link>
                 </div>
-                <div className={styles.contacts}>
-                    <div className="">+37533 342234234234</div>
+    <div className={styles.contacts}>
+    <div className="">+37533 342234234234</div>
                     <div className="">info@sparxlab.by</div>
                 </div>
 
@@ -82,14 +82,14 @@ const Header = () => {
                                  className="w-full h-full object-contain"/>
                         </div>
                     </Link>
-                    <div className={styles.navigation}>
+                    <div className="hidden md:flex md:gap-5 md:items-center ">
                         <Link className={styles.navigationItem} href="/fdm_fff">FDM/FFF</Link>
                         <Link className={styles.navigationItem} href="/sla">SLA</Link>
                         <Link className={styles.navigationItem} href="/slm">SLM</Link>
                         <Link className={styles.navigationItem} href="/sls">SLS</Link>
                     </div>
                     <div className="flex flex-row">
-                        <div className={styles.contacts}>
+                    <div className={styles.contacts}>
                             <div className="">+37533 342234234234</div>
                             <div className="">info@sparxlab.by</div>
                         </div>

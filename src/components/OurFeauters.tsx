@@ -39,7 +39,7 @@ const OurFeatures = () => {
                         subtitle="(Fused Deposition Modeling)"
                         details="FDM — это метод послойного нанесения расплавленного пластика, который идеально подходит для прототипирования и создания функциональных деталей. Эта технология обеспечивает доступность и простоту в использовании, позволяя быстро получать изделия с хорошими механическими свойствами."
                         icon={
-                            <Image src="./images/fdm/fdm_main.jpg" className="rounded-[20px]" alt="fdm" />
+                            <Image src="https://sparxlab.by/images/fdm/fdm_main.jpg" className="rounded-[20px]" alt="fdm" />
                         }
                     />
                     <ServiceCard
@@ -48,7 +48,7 @@ const OurFeatures = () => {
                         subtitle="(Stereolithography)"
                         details="SLA использует лазер для полимеризации смолы, создавая детали с высокой детализацией и гладкой поверхностью. Эта технология подходит для ювелирных изделий и медицинских моделей, обеспечивая отличное качество и точность, что делает её популярной среди дизайнеров и инженеров."
                         icon={
-                            <Image src="./images/sla/sla_main.jpg" className="rounded-[20px]" alt="sla"/>
+                            <Image src="https://sparxlab.by/images/sla/sla_main.jpg" className="rounded-[20px]" alt="sla"/>
                         }
                     />
                     <ServiceCard
@@ -57,7 +57,7 @@ const OurFeatures = () => {
                         subtitle="(Selective Laser Sintering)"
                         details="SLS работает на основе спекания порошковых материалов с помощью лазера, что позволяет создавать прочные и сложные детали. Эта технология идеально подходит для функциональных прототипов и малосерийного производства, обеспечивая высокую прочность и надежность изделий."
                         icon={
-                            <Image src="./images/sls/sls_main.jpg" className="rounded-[20px]" alt="sls"/>
+                            <Image src="https://sparxlab.by/images/sls/sls_main.jpg" className="rounded-[20px]" alt="sls"/>
                         }
                     />
                     <ServiceCard
@@ -66,7 +66,7 @@ const OurFeatures = () => {
                         subtitle="(Selective Laser Melting)"
                         details="SLM использует лазер для плавления металлического порошка, создавая детали с высокой прочностью и сложной геометрией. Эта технология применяется в аэрокосмической и медицинской отраслях, обеспечивая отличное качество и минимальные отходы в процессе производства."
                         icon={
-                            <Image src="./images/slm/slm_main.jpg" className="rounded-[20px]" alt="slm"/>
+                            <Image src="https://sparxlab.by/images/slm/slm_main.jpg" className="rounded-[20px]" alt="slm"/>
                         }
                     />
                 </div>
