@@ -60,7 +60,7 @@ const Header = () => {
 
             {isVisible && (
                 <motion.div
-                    initial={{ y: -100, opacity: 0 }} // Начальная позиция выше и прозрачность 0
+                    initial={{ y: 100, opacity: 0 }} // Начальная позиция выше и прозрачность 0
                     animate={isVisible ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }} // Появление и исчезновение
                     style={{padding: '20px', position: "fixed", width: "100%", background: '#dadbd5'}}
                     className="z-50 mx-auto pb-2 pt-2 dark:bg-dark lg:pb-[10px] lg:pt-[10px] flex items-center justify-between shadow-md rounded-b-lg"

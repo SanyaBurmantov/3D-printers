@@ -1,6 +1,7 @@
 import React from 'react';
 import ScrollBtn from "../components/UI/ScrollBtn";
 import styles from './styles.module.css'
+import {Image} from "@nextui-org/react";
 
 const GetStarted = () => {
     return (
@@ -9,7 +10,7 @@ const GetStarted = () => {
         >
             <div className="container mx-auto">
                 <div className="flex flex-wrap items-center -mx-4">
-                    <div className="w-full px-4 lg:w-5/12">
+                    <div className="w-full px-4 lg:w-6/12">
                         <div className="hero-content">
                             <h1
                                 className="mb-5 text-4xl font-bahnschrift font-bold font-stretch-condensed !leading-[1.208] text-dark dark:text-white sm:text-[32px] lg:text-[30px] xl:text-2xl"
@@ -34,13 +35,14 @@ const GetStarted = () => {
                         </div>
                     </div>
                     <div className="hidden px-4 lg:block lg:w-1/12"></div>
-                    <div className="w-full px-4 lg:w-6/12">
+                    <div className="w-full px-4 lg:w-4/12">
                         <div className="lg:ml-auto lg:text-right">
                             <div className="relative z-10 inline-block pt-11 lg:pt-0">
-                                <img
-                                    src="https://cdn.tailgrids.com/2.0/image/marketing/images/hero/hero-image-01.png"
+                                <Image
+                                    src="./main.jpg"
                                     alt="hero"
                                     className="max-w-full lg:ml-auto"
+                                    isBlurred
                                 />
                                 <span className="absolute -left-8 -bottom-8 z-[-1]">
                      <svg

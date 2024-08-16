@@ -1,6 +1,6 @@
 .helpBtn {
   position: fixed;
-  bottom: 100px;
+  bottom: 80px;
   right: -12px;
 }
 
@@ -10,6 +10,21 @@
   }
 }
 
+.goTopBtn{
+  position: fixed;
+  left: 2px;
+  bottom: 150px;
+  width: 42px;
+  z-index: 500;
+  height: 42px;
+  @media screen and (max-width: 696px) {
+    display: none;
+  }
+}
+.goTopBtn_img{
+  width: 100%;
+  height: 100%;
+}
 .hideMobile{
   @media screen and (min-width: 720px){
     display: none;

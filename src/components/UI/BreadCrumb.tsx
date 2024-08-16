@@ -9,7 +9,7 @@ export interface RouteName {
 
 const BreadCrumb = ({name}: RouteName) => {
     return (
-        <Breadcrumbs className="mb-8 mt-12">
+        <Breadcrumbs className="mt-12">
             <BreadcrumbItem><Link href={'/'}>Главная </Link></BreadcrumbItem>
             <BreadcrumbItem>{name}</BreadcrumbItem>
         </Breadcrumbs>

@@ -1,13 +1,15 @@
 'use client'
-import React, {useState} from 'react';
+import React, {Suspense, useState} from 'react';
 import Link from "next/link";
 import styles from "@/components/styles.module.css";
 import {IServiceCard} from "@/components/OurFeauters";
 
 const ServiceCard = ({icon, title, subtitle, details, route}: IServiceCard) => {
     const [isHovered, setIsHovered] = useState(false);
+    const Skeleton = React.lazy(() => import('@/components/UI/Skeleton'));
     return (
         <>
+            <Suspense fallback={<Skeleton />}>
             <div className="w-full lg:w-1/2 xl:w-1/4 px-2">
                 <Link href={route}>
                     <div
@@ -33,6 +35,7 @@ const ServiceCard = ({icon, title, subtitle, details, route}: IServiceCard) => {
                     </div>
                 </Link>
             </div>
+            </Suspense>
         </>
     );
 };
