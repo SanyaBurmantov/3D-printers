@@ -6,12 +6,12 @@ import {Image} from "@nextui-org/react";
 const GetStarted = () => {
     return (
         <div
-            className="relative mt-[-1px] bg-white dark:bg-dark pt-[40px] pb-[50px] lg:pt-[60px]"
+            className="relative mt-[-1px] bg-white dark:bg-dark pt-[40px] pb-[50px] lg:pt-[19px]"
         >
             <div className="container mx-auto">
                 <div className="flex flex-wrap items-center -mx-4">
                     <div className="w-full px-4 lg:w-6/12">
-                        <div className="hero-content">
+                        <div className="hero-content relative">
                             <h1
                                 className="mb-5 text-4xl font-bahnschrift font-bold font-stretch-condensed !leading-[1.208] text-dark dark:text-white sm:text-[32px] lg:text-[30px] xl:text-2xl"
                             >
@@ -21,7 +21,7 @@ const GetStarted = () => {
                             </h1>
 
                             <p
-                                className="mb-8 max-w-[480px] relative text-base text-body-color dark:text-dark-6"
+                                className="mb-12 relative text-base pt-[20px] text-body-color dark:text-dark-6"
                             >
                                 Мы — эксперты в моделировании, сканировании и 3D печати. Наша команда использует
                                 передовые технологии для создания высококачественных прототипов и деталей,
@@ -30,9 +30,10 @@ const GetStarted = () => {
                                 идеи и превратить их в реальность. Исследуйте наш сайт, чтобы узнать больше о наших
                                 услугах и проектах. Свяжитесь с нами, и давайте создадим что-то удивительное вместе!
                             </p>
-                            <ScrollBtn />
+
 
                         </div>
+                        <ScrollBtn />
                     </div>
                     <div className="hidden px-4 lg:block lg:w-1/12"></div>
                     <div className="w-full px-4 lg:w-4/12">

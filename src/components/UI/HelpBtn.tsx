@@ -11,7 +11,7 @@ const HelpBtn = () => {
     return (
         <>
             <button
-                className={`${styles.helpBtn} z-50 inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center text-white rounded-l-2xl bg-primary hover:bg-blue-dark lg:px-7`}
+                className={`${styles.helpBtn} z-50 inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center text-white rounded-l-2xl bg-primary hover:bg-orange-600 lg:px-7`}
                 onClick={onOpen}
             >
                 <FiHelpCircle /> <p className={`pl-2 ${styles.textPc}`}> Мне нужна помощь </p>

@@ -23,7 +23,8 @@
 }
 
 .navigationItem {
-
+    display: flex;
+    align-items: center;
 }
 
 .baseHeader{
@@ -34,9 +35,11 @@
 .contacts{
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     @media screen and (max-width: 720px){
         display: none;
     }
+    padding-right: 1.2rem;
 }
 
 .navbar{

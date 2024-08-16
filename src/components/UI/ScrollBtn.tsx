@@ -1,5 +1,6 @@
 'use client'
 import React from 'react';
+import { HiMiniArrowUturnDown } from "react-icons/hi2";
 
 const ScrollBtn = () => {
     const scrollDown = () => {
@@ -8,13 +9,14 @@ const ScrollBtn = () => {
             behavior: 'smooth' // Плавная прокрутка
         });
     };
+
     return (
-        <ul className="flex flex-wrap items-center">
+        <ul className="hidden lg:flex flex-wrap items-center justify-end translate-x-10 translate-y-20">
             <li>
                 <button onClick={scrollDown}
-                   className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-blue-dark lg:px-7"
+                        className="inline-flex items-center justify-center px-3 py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-orange-600 lg:px-3"
                 >
-                    Подробнее
+                    <HiMiniArrowUturnDown className="w-10 h-10"/>
                 </button>
             </li>
         </ul>

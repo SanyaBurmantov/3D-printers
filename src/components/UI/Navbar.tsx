@@ -7,7 +7,7 @@ export default function NavbarHeader() {
 
 
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen}>
+        <Navbar onMenuOpenChange={setIsMenuOpen} className="rounded-[50%] bg-[none]">
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     className="md:hidden"

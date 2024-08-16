@@ -35,7 +35,7 @@ const GoTopBtn = () => {
         >
             {isVisible && (
                 <button onClick={scrollToTop} className={styles.goTopBtn}>
-                    <IoArrowUpCircleOutline className={styles.goTopBtn_img} />
+                    <IoArrowUpCircleOutline className={`${styles.goTopBtn_img} hover:bg-orange-600 rounded-[50%]`} />
                 </button> )}
         </motion.div>
     );
