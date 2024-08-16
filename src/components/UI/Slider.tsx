@@ -7,6 +7,9 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 const Slider = () => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const setThumbs = (args: any) => {
+        setThumbsSwiper(args)
+    }
     return (
         <div className={styles.sliderWrapper}>
 
@@ -51,7 +54,7 @@ const Slider = () => {
                     </SwiperSlide>
                 </Swiper>
                 <Swiper
-                    onSwiper={setThumbsSwiper}
+                    onSwiper={setThumbs}
                     loop={true}
                     spaceBetween={10}
                     slidesPerView={4.5}
