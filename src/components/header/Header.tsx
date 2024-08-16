@@ -58,10 +58,12 @@ const Header = () => {
                         <div className="">+3753334223</div>
                         <div className="">info@sparxlab.by</div>
                     </div>
+                    <Link href="/create_order">
                     <button
                         className="z-50 inline-flex items-center justify-center w-[60px] h-[60px] text-base font-medium text-white bg-primary text-center rounded hover:bg-orange-600 lg:hidden ">
                         <MdShoppingCartCheckout className="w-[40px] h-[40px]"/>
                     </button>
+                    </Link>
                 </div>
 
 
