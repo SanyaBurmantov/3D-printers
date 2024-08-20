@@ -14,6 +14,33 @@ export async function generateStaticParams() {
 }
 
 const Page = () => {
+    const slides = [
+        "./images/pageSwiperSlides/FDM/1.jpg",
+        "./images/pageSwiperSlides/FDM/2.jpg",
+        "./images/pageSwiperSlides/FDM/3.jpg",
+        "./images/pageSwiperSlides/FDM/4.jpg",
+        "./images/pageSwiperSlides/FDM/5.jpg",
+        "./images/pageSwiperSlides/FDM/6.jpg",
+        "./images/pageSwiperSlides/FDM/7.jpg",
+        "./images/pageSwiperSlides/FDM/8.jpg",
+        "./images/pageSwiperSlides/FDM/9.jpg",
+        "./images/pageSwiperSlides/FDM/10.jpg",
+        "./images/pageSwiperSlides/FDM/11.jpg",
+        "./images/pageSwiperSlides/FDM/12.jpg",
+        "./images/pageSwiperSlides/FDM/13.jpg",
+        "./images/pageSwiperSlides/FDM/14.jpg",
+        "./images/pageSwiperSlides/FDM/15.jpg",
+        "./images/pageSwiperSlides/FDM/16.jpg",
+        "./images/pageSwiperSlides/FDM/17.jpg",
+        "./images/pageSwiperSlides/FDM/18.jpg",
+        "./images/pageSwiperSlides/FDM/19.jpg",
+        "./images/pageSwiperSlides/FDM/20.jpg",
+        "./images/pageSwiperSlides/FDM/21.jpg",
+        "./images/pageSwiperSlides/FDM/22.jpg",
+        "./images/pageSwiperSlides/FDM/23.jpg",
+        "./images/pageSwiperSlides/FDM/24.jpg",
+        "./images/pageSwiperSlides/FDM/25.jpg"
+    ]
     return (
         <>
             <SimpleHeader/>
@@ -118,7 +145,7 @@ const Page = () => {
                             </div>
 
                             <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
-                                <Slider/>
+                                <Slider slides={slides}/>
                             </div>
                         </div>
                     </div>

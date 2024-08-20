@@ -12,6 +12,35 @@ export async function generateStaticParams() {
     ];
 }
 const Page = () => {
+    const slides = [
+        "./images/pageSwiperSlides/SLA/1.jpg",
+        "./images/pageSwiperSlides/SLA/2.jpg",
+        "./images/pageSwiperSlides/SLA/3.jpg",
+        "./images/pageSwiperSlides/SLA/4.jpg",
+        "./images/pageSwiperSlides/SLA/5.jpg",
+        "./images/pageSwiperSlides/SLA/6.jpg",
+        "./images/pageSwiperSlides/SLA/7.jpg",
+        "./images/pageSwiperSlides/SLA/8.jpg",
+        "./images/pageSwiperSlides/SLA/9.jpg",
+        "./images/pageSwiperSlides/SLA/10.jpg",
+        "./images/pageSwiperSlides/SLA/11.jpg",
+        "./images/pageSwiperSlides/SLA/12.jpg",
+        "./images/pageSwiperSlides/SLA/13.jpg",
+        "./images/pageSwiperSlides/SLA/14.jpg",
+        "./images/pageSwiperSlides/SLA/15.jpg",
+        "./images/pageSwiperSlides/SLA/16.jpg",
+        "./images/pageSwiperSlides/SLA/17.jpg",
+        "./images/pageSwiperSlides/SLA/18.jpg",
+        "./images/pageSwiperSlides/SLA/19.jpg",
+        "./images/pageSwiperSlides/SLA/20.jpg",
+        "./images/pageSwiperSlides/SLA/21.jpg",
+        "./images/pageSwiperSlides/SLA/22.jpg",
+        "./images/pageSwiperSlides/SLA/23.jpg",
+        "./images/pageSwiperSlides/SLA/24.jpg",
+        "./images/pageSwiperSlides/SLA/25.jpg",
+        "./images/pageSwiperSlides/SLA/26.jpg",
+        "./images/pageSwiperSlides/SLA/27.jpg"
+    ]
     return (
         <div>
             <SimpleHeader/>
@@ -94,7 +123,7 @@ const Page = () => {
                             </Link>
                         </div>
                         <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
-                            <Slider/>
+                            <Slider slides={slides}/>
                         </div>
                     </div>
                 </div>

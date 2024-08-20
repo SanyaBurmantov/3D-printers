@@ -66,8 +66,6 @@ const Header = () => {
                     </Link>
                 </div>
 
-
-
             </motion.div>
 
             {(

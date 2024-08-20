@@ -12,8 +12,30 @@ export async function generateStaticParams() {
     ];
 }
 const Page = () => {
+    const slides = [
+        "./images/pageSwiperSlides/SLM/10.jpg",
+        "./images/pageSwiperSlides/SLM/11.jpg",
+        "./images/pageSwiperSlides/SLM/12.jpg",
+        "./images/pageSwiperSlides/SLM/13.jpg",
+        "./images/pageSwiperSlides/SLM/14.jpg",
+        "./images/pageSwiperSlides/SLM/15.jpg",
+        "./images/pageSwiperSlides/SLM/16.jpg",
+        "./images/pageSwiperSlides/SLM/17.jpg",
+        "./images/pageSwiperSlides/SLM/18.jpg",
+        "./images/pageSwiperSlides/SLM/19.jpg",
+        "./images/pageSwiperSlides/SLM/20.jpg",
+        "./images/pageSwiperSlides/SLM/21.jpg",
+        "./images/pageSwiperSlides/SLM/22.jpg",
+        "./images/pageSwiperSlides/SLM/23.jpg",
+        "./images/pageSwiperSlides/SLM/24.jpg",
+        "./images/pageSwiperSlides/SLM/25.jpg",
+        "./images/pageSwiperSlides/SLM/26.jpg",
+        "./images/pageSwiperSlides/SLM/27.jpg",
+        "./images/pageSwiperSlides/SLM/28.jpg",
+        "./images/pageSwiperSlides/SLM/29.jpg",
+        "./images/pageSwiperSlides/SLM/30.jpg"
+    ]
     return (
-
         <div>
             <SimpleHeader/>
             <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[80px]">
@@ -95,7 +117,7 @@ const Page = () => {
                             </Link>
                         </div>
                         <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
-                            <Slider />
+                            <Slider slides={slides}/>
                         </div>
 
                     </div>

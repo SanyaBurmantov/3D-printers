@@ -12,7 +12,41 @@ export async function generateStaticParams() {
     ];
 }
 const Page = () => {
+    const slides = [
+
+            "./images/pageSwiperSlides/SLS/1.jpg",
+            "./images/pageSwiperSlides/SLS/2.jpg",
+            "./images/pageSwiperSlides/SLS/3.jpg",
+            "./images/pageSwiperSlides/SLS/4.jpg",
+            "./images/pageSwiperSlides/SLS/5.jpg",
+            "./images/pageSwiperSlides/SLS/6.jpg",
+            "./images/pageSwiperSlides/SLS/7.jpg",
+            "./images/pageSwiperSlides/SLS/8.jpg",
+            "./images/pageSwiperSlides/SLS/9.jpg",
+            "./images/pageSwiperSlides/SLS/10.jpg",
+            "./images/pageSwiperSlides/SLS/11.jpg",
+            "./images/pageSwiperSlides/SLS/12.jpg",
+            "./images/pageSwiperSlides/SLS/13.jpg",
+            "./images/pageSwiperSlides/SLS/14.jpg",
+            "./images/pageSwiperSlides/SLS/15.jpg",
+            "./images/pageSwiperSlides/SLS/16.jpg",
+            "./images/pageSwiperSlides/SLS/17.jpg",
+            "./images/pageSwiperSlides/SLS/18.jpg",
+            "./images/pageSwiperSlides/SLS/19.jpg",
+            "./images/pageSwiperSlides/SLS/20.jpg",
+            "./images/pageSwiperSlides/SLS/21.jpg",
+            "./images/pageSwiperSlides/SLS/22.jpg",
+            "./images/pageSwiperSlides/SLS/23.jpg",
+            "./images/pageSwiperSlides/SLS/24.jpg",
+            "./images/pageSwiperSlides/SLS/25.jpg",
+            "./images/pageSwiperSlides/SLS/26.jpg",
+            "./images/pageSwiperSlides/SLS/27.jpg",
+            "./images/pageSwiperSlides/SLS/28.jpg",
+            "./images/pageSwiperSlides/SLS/29.jpg",
+            "./images/pageSwiperSlides/SLS/30.jpg"
+    ]
     return (
+
         <div>
             <SimpleHeader/>
             <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[80px]">
@@ -95,7 +129,7 @@ const Page = () => {
                             </Link>
                         </div>
                         <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
-                            <Slider/>
+                            <Slider slides={slides}/>
                         </div>
                     </div>
                 </div>
