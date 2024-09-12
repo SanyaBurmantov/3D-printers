@@ -23,13 +23,14 @@ async function sendMail(data: any) {
   `
 
     const transporter = nodemailer.createTransport({
-        service: "smtp.mail.ru", // С помощью этой настройки можно менять тип почты, например gmail
-        port: 465,
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
         auth: {
-            user: process.env.HOTMAIL_USER,
-            pass: process.env.HOTMAIL_PASS,
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
         },
-    })
+    });
 
     return await transporter.sendMail({
         from: process.env.HOTMAIL_FROM,

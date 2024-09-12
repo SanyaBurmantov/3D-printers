@@ -1,13 +1,14 @@
 'use client'
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Checkbox} from "@nextui-org/checkbox";
-
+import nodemailer from 'nodemailer';
 import {Input, Textarea} from "@nextui-org/input";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@nextui-org/dropdown";
 import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure} from "@nextui-org/react";
 import {AnimatePresence, motion} from 'framer-motion';
 import {AttachmentsFileInput} from "@/components/Inputs/AttachmentFileInput";
 import { useForm, ValidationError } from '@formspree/react';
+import axios from "axios";
 
 const Page = () => {
     const [state, handleSubmit] = useForm("myzgvavl");
@@ -111,44 +112,76 @@ const Page = () => {
 
     };
 
-    const handleCreateOrder = (e: any) => {
-        // onOpen()
+    const [files, setFiles] = useState<File[]>([]);
+
+    const handleCreateOrder = async (e: any) => {
+
         e.preventDefault()
+        const token = "6534530183:AAE0eiwpeM-VsL2ZUjwjXRKU49KfExqlmdc";
+        const users = ["408745156"];
+        const message =
+            `   
+                %0A%0A ** Заявка **  %0A%0A
+                Клиент: ${fio} %0A%0A
+                номер телефона: ${number} %0A%0A
+                почта: ${mail} %0A%0A
+                организация: ${org} %0A%0A
+                 %0A%0A ** Описание  %0A%0A
+                нужно сканирование: ${needScan ? 'Да' : 'Нет'} %0A%0A
+                нужно моделирование: ${needModel ? 'Да' : 'Нет'} %0A%0A
+                нужна печать: ${needPrint ? 'Да' : 'Нет'} %0A%0A
+                габариты: ${gabarit} %0A%0A
+                технология: ${selectedTechnology.values().next().value} %0A%0A
+                материал: ${selectedMaterial.values().next().value} %0A%0A
+                количество: ${count} %0A%0A
+                нагрузки: ${pressure} %0A%0A
+                использование: ${uses} %0A%0A
+                комментарий: ${comment} %0A%0A
+                
+            `
+        ;
+        const requests = [];
 
-        // if (mail === "" || fio === "" || number === "") {
-        //     return null
-        // }
+        try {
+            const formData = new FormData();
+            files.forEach((file, index) => {
+                formData.append(`file${index}`, URL.createObjectURL(file));
+                console.log(file)
+            });
 
-        fetch(`https://sparxlab.by/send_message/send-email`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "нужно сканирование": needScan,
-                "нужно моделирование": needModel,
-                "нужна печать": needPrint,
-                "габариты": gabarit,
-                "технология": selectedTechnology.values().next().value,
-                "материал": selectedMaterial.values().next().value,
-                "колличество": count,
-                "нагрузки": pressure,
-                "использование": uses,
-                "коммент": comment,
-                "номер телефона": number,
-                "почта": mail,
-                "фио": fio,
-                "организация": org,
-            })
-        })
-            .then(r => r.json())
-            .then(d => {
-                if (d?.ok) {
-                    // setIsSended(true)
-                }
-            })
-            .catch(e => console.log(e.message))
-        return {}
+            for (let user of users) {
+                const sendMessageUrl = `https://api.telegram.org/bot${token}/sendMessage`;
+                const sendDocumentUrl = `https://api.telegram.org/bot${token}/sendDocument`;
+
+                const sendMessageConfig = {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                };
+
+                const sendDocumentConfig = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                };
+
+                const sendMessageData = `chat_id=${user}&text=${encodeURIComponent(message)}&parse_mode=html`;
+                const sendDocumentData = formData;
+                sendDocumentData.append('chat_id', user);
+
+                const sendMessagePromise = axios.post(sendMessageUrl, sendMessageData, sendMessageConfig);
+                const sendDocumentPromise = axios.post(sendDocumentUrl, sendDocumentData, sendDocumentConfig);
+
+                requests.push(sendMessagePromise);
+                requests.push(sendDocumentPromise);
+            }
+
+            await Promise.all(requests);
+        } catch (error) {
+            console.error("Ошибка отправки сообщений:", error);
+        } finally {
+            // ...
+        }
 
     }
 
@@ -210,7 +243,7 @@ const Page = () => {
                     </div>
                     {selectedSomething && (
                         <>
-                            <AttachmentsFileInput downloadFilesCallback={handleFilesDownload}/>
+                            <AttachmentsFileInput files={files} setFiles={setFiles} downloadFilesCallback={handleFilesDownload}/>
                         </>
                     )}
                     <div className="flex flex-col gap-4 mt-6">

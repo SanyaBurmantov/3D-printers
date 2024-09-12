@@ -12,17 +12,19 @@ import axios from 'axios';
 
 interface AttachmentsFileInputProps {
     downloadFilesCallback: (filesDownload: boolean) => void;
+    files: File[];
+    setFiles: React.Dispatch<React.SetStateAction<File[]>>
 }
 
 export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
-    const [files, setFiles] = useState<File[]>([]);
+
     const [previewUrls, setPreviewUrls] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newFiles = Array.from(e.target.files || [])
-        setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+        props.setFiles((prevFiles) => [...prevFiles, ...newFiles]);
 
         const newPreviewUrls = newFiles.map((file) => URL.createObjectURL(file));
         setPreviewUrls((prevUrls) => [...prevUrls, ...newPreviewUrls]);
@@ -30,15 +32,15 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
 
     const sendFiles = async (e: React.FocusEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (files.length) {
+        if (props.files.length) {
             props.downloadFilesCallback(true);
         } else {
             props.downloadFilesCallback(false);
         }
-        if (!files || files.length === 0) return
+        if (!props.files || props.files.length === 0) return
         try {
             const data = new FormData()
-            for (const file of files) {
+            for (const file of props.files) {
                 data.append(file.name, file)
             }
 
@@ -54,9 +56,9 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
 
 
     const handleRemoveFile = (index: number) => {
-        const newFiles = [...files];
+        const newFiles = [...props.files];
         newFiles.splice(index, 1);
-        setFiles(newFiles);
+        props.setFiles(newFiles);
 
         const newPreviewUrls = [...previewUrls];
         newPreviewUrls.splice(index, 1);
@@ -64,15 +66,15 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
     };
 
     const handleCancel = () => {
-        setFiles([]);
+        props.setFiles([]);
         setPreviewUrls([]);
     };
 
     useEffect(() => {
-        if(files.length>0){
+        if(props.files.length>0){
             props.downloadFilesCallback( true)
         } else  props.downloadFilesCallback( false)
-    }, [files]);
+    }, [props.files]);
 
     return (
         <form onSubmit={sendFiles}>
@@ -129,11 +131,11 @@ export const AttachmentsFileInput = (props: AttachmentsFileInputProps) => {
                 </label>
             </div>
             {error && <div className='text-red-500 mt-2'>{error}</div>}
-            {files.length > 0 && (
+            {props.files.length > 0 && (
                 <div className='mt-4'>
                     <h3 className='text-lg font-medium mb-2'>Загружаемые файлы:</h3>
                     <div className='grid grid-cols-4 gap-4'>
-                        {files.map((file, index) => (
+                        {props.files.map((file, index) => (
                             <div key={index} className='relative'>
                                 <img
                                     src={previewUrls[index]}
