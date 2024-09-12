@@ -7,8 +7,13 @@ import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@nextui-org
 import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure} from "@nextui-org/react";
 import {AnimatePresence, motion} from 'framer-motion';
 import {AttachmentsFileInput} from "@/components/Inputs/AttachmentFileInput";
+import { useForm, ValidationError } from '@formspree/react';
 
 const Page = () => {
+    const [state, handleSubmit] = useForm("myzgvavl");
+    if (state.succeeded) {
+        return <p>Thanks for joining!</p>;
+    }
     const [needScan, setNeedScan] = React.useState(false);
     const [needModel, setNeedModel] = React.useState(false);
     const [needPrint, setNeedPrint] = React.useState(false);
@@ -107,14 +112,14 @@ const Page = () => {
     };
 
     const handleCreateOrder = (e: any) => {
-        onOpen()
+        // onOpen()
         e.preventDefault()
 
-        if (mail === "" || fio === "" || number === "") {
-            return null
-        }
+        // if (mail === "" || fio === "" || number === "") {
+        //     return null
+        // }
 
-        fetch(`/api/send`, {
+        fetch(`https://sparxlab.by/send_message/send-email`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -382,7 +387,7 @@ const Page = () => {
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3 w-fit">
                                                 <Input placeholder="Введите количество"
-                                                       value={count} onValueChange={handleSelectCount} />
+                                                       value={count} onValueChange={handleSelectCount}/>
 
                                                 <div className="pointer-events-none flex items-center">
                                                     <span className="text-default-400 text-small">шт</span>
