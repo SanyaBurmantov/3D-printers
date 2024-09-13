@@ -121,34 +121,27 @@ const Page = () => {
         const users = ["408745156"];
         const message =
             `   
-                %0A%0A ** Заявка **  %0A%0A
-                Клиент: ${fio} %0A%0A
-                номер телефона: ${number} %0A%0A
-                почта: ${mail} %0A%0A
-                организация: ${org} %0A%0A
-                 %0A%0A ** Описание  %0A%0A
-                нужно сканирование: ${needScan ? 'Да' : 'Нет'} %0A%0A
-                нужно моделирование: ${needModel ? 'Да' : 'Нет'} %0A%0A
-                нужна печать: ${needPrint ? 'Да' : 'Нет'} %0A%0A
-                габариты: ${gabarit} %0A%0A
-                технология: ${selectedTechnology.values().next().value} %0A%0A
-                материал: ${selectedMaterial.values().next().value} %0A%0A
-                количество: ${count} %0A%0A
-                нагрузки: ${pressure} %0A%0A
-                использование: ${uses} %0A%0A
-                комментарий: ${comment} %0A%0A
-                
+                Заявка %0A
+                Клиент: ${fio} %0A
+                номер телефона: ${number} %0A
+                почта: ${mail} %0A
+                организация: ${org} %0A
+                Описание %0A
+                нужно сканирование: ${needScan ? 'Да' : 'Нет'} %0A
+                нужно моделирование: ${needModel ? 'Да' : 'Нет'} %0A
+                нужна печать: ${needPrint ? 'Да' : 'Нет'} %0A
+                габариты: ${gabarit} %0A
+                технология: ${selectedTechnology.values().next().value} %0A
+                материал: ${selectedMaterial.values().next().value} %0A
+                количество: ${count} %0A
+                нагрузки: ${pressure} %0A
+                использование: ${uses} %0A
+                комментарий: ${comment} %0A
             `
         ;
         const requests = [];
 
         try {
-            const formData = new FormData();
-            files.forEach((file, index) => {
-                formData.append(`file${index}`, URL.createObjectURL(file));
-                console.log(file)
-            });
-
             for (let user of users) {
                 const sendMessageUrl = `https://api.telegram.org/bot${token}/sendMessage`;
                 const sendDocumentUrl = `https://api.telegram.org/bot${token}/sendDocument`;
@@ -166,16 +159,19 @@ const Page = () => {
                 };
 
                 const sendMessageData = `chat_id=${user}&text=${encodeURIComponent(message)}&parse_mode=html`;
-                const sendDocumentData = formData;
-                sendDocumentData.append('chat_id', user);
+
+                const formData = new FormData();
+                files.forEach((file, index) => {
+                    formData.append(`document`, file, file.name);
+                    const sendDocumentData = formData;
+                    sendDocumentData.append('chat_id', user);
+                    const sendDocumentPromise = axios.post(sendDocumentUrl, sendDocumentData, sendDocumentConfig);
+                    requests.push(sendDocumentPromise);
+                });
 
                 const sendMessagePromise = axios.post(sendMessageUrl, sendMessageData, sendMessageConfig);
-                const sendDocumentPromise = axios.post(sendDocumentUrl, sendDocumentData, sendDocumentConfig);
-
                 requests.push(sendMessagePromise);
-                requests.push(sendDocumentPromise);
             }
-
             await Promise.all(requests);
         } catch (error) {
             console.error("Ошибка отправки сообщений:", error);
