@@ -32,7 +32,7 @@ const OurFeatures = () => {
                     </div>
                 </div>
 
-                <div className="-mx-4 flex flex-wrap flex-col lg:flex-row">
+                <div className="-mx-4 grid md:grid-cols-2 xl:grid-cols-4 gap-4">
                     <ServiceCard
                         route={'/fdm_fff'}
                         title="FDM/FFF"
