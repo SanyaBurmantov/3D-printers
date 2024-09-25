@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Checkbox} from "@nextui-org/checkbox";
 import nodemailer from 'nodemailer';
 import {Input, Textarea} from "@nextui-org/input";
@@ -20,8 +20,8 @@ const Page = () => {
     const [needPrint, setNeedPrint] = React.useState(false);
     const [needHelp, setNeedHelp] = React.useState(false);
     const [filesDownload, setFilesDownload] = React.useState(false);
-    const [selectedTechnology, setSelectedTechnology] = React.useState(new Set([]));
-    const [selectedMaterial, setSelectedMaterial] = React.useState(new Set([]));
+    const [selectedTechnology, setSelectedTechnology] = React.useState(new Set(['']));
+    const [selectedMaterial, setSelectedMaterial] = React.useState(new Set(['']));
     const [selectedSomething, setSelectedSomething] = React.useState(false)
     const [gabarit, setGabarit] = React.useState('');
     const [pressure, setPressure] = React.useState('');
@@ -114,6 +114,33 @@ const Page = () => {
 
     const [files, setFiles] = useState<File[]>([]);
 
+    const [isFdm, setIsFdm] = useState(false);
+    const [isSla, setIsSla] = useState(false);
+    const [isSlm, setIsSlm] = useState(false);
+    const [isSls, setIsSls] = useState(false);
+
+    useEffect(() => {
+        // Reset all states
+        setIsFdm(false);
+        setIsSla(false);
+        setIsSlm(false);
+        setIsSls(false);
+        setSelectedMaterial(new Set(['']));
+        if (selectedTechnology.has("FDM/FFF")) {
+            setIsFdm(true);
+            console.log('FDM selected');
+        } else if (selectedTechnology.has("SLA")) {
+            setIsSla(true);
+            console.log('SLA selected');
+        } else if (selectedTechnology.has("SLM")) {
+            setIsSlm(true);
+            console.log('SLM selected');
+        } else if (selectedTechnology.has("SLS")) {
+            setIsSls(true);
+            console.log('SLS selected');
+        }
+    }, [selectedTechnology]);
+
     const handleCreateOrder = async (e: any) => {
 
         e.preventDefault()
@@ -196,7 +223,6 @@ const Page = () => {
         return isInvalidFio && isInvalidNumber && !fio && !number
     }
 
-
     useEffect(() => {
         if (needPrint) {
             setSelectedSomething(true)
@@ -208,7 +234,6 @@ const Page = () => {
     }, [needPrint, needScan, needModel]);
 
     useEffect(() => {
-        // @ts-ignore
         if (selectedMaterial.has("Мне нужна помощь")) {
             setNeedHelp(true)
         } else {
@@ -316,7 +341,127 @@ const Page = () => {
                                         </td>
                                     </motion.tr>
 
-                                    <motion.tr
+                                    {isFdm && (
+                                        <motion.tr
+                                            initial={{opacity: 0, y: -20}}
+                                            animate={{opacity: 1, y: 0}}
+                                            transition={{duration: 0.5}}
+                                            className="border-b border-gray-300 pb-4 mb-4"
+                                        >
+                                            <td className="w-1/4 font-medium">Материал печати</td>
+                                            <td className="w-3/4">
+                                                <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
+                                                    <Dropdown>
+                                                        <DropdownTrigger>
+                                                            <div
+                                                                className="flex flex-wrap md:flex-nowrap gap-4 items-center">
+                                                                <Input
+                                                                    type="text"
+                                                                    labelPlacement="outside-left"
+                                                                    endContent={
+                                                                        <div
+                                                                            className="pointer-events-none flex items-center">
+                                                                        <span
+                                                                            className="text-default-400 text-small">▼</span>
+                                                                        </div>
+                                                                    }
+                                                                    value={selectedMaterialValue}
+                                                                    placeholder={'Выберите материал'}
+                                                                />
+                                                            </div>
+                                                        </DropdownTrigger>
+                                                        <DropdownMenu
+                                                            aria-label="Single selection example"
+                                                            variant="flat"
+                                                            disallowEmptySelection
+                                                            selectionMode="single"
+                                                            selectedKeys={selectedMaterial}
+                                                            onSelectionChange={handleSelectMaterial}
+                                                        >
+                                                            <DropdownItem key={'PLA'}>PLA</DropdownItem>
+                                                            <DropdownItem key={'ABS'}>ABS</DropdownItem>
+                                                            <DropdownItem key={'ASA'}>ASA</DropdownItem>
+                                                            <DropdownItem key={'PET/PETG'}>PET/PETG</DropdownItem>
+                                                            <DropdownItem key={'PC'}>PC</DropdownItem>
+                                                            <DropdownItem key={'CPE'}>CPE</DropdownItem>
+                                                            <DropdownItem key={'PP'}>PP</DropdownItem>
+                                                            <DropdownItem key={'TPU 95A'}>TPU 95A</DropdownItem>
+                                                            <DropdownItem key={'PA'}>PA</DropdownItem>
+                                                            <DropdownItem key={'TOUGH PLA'}>TOUGH PLA</DropdownItem>
+                                                            <DropdownItem key={'PA-CF'}>PA-CF</DropdownItem>
+                                                            <DropdownItem key={'PA-GF'}>PA-GF</DropdownItem>
+                                                            <DropdownItem key={'ULTEM'}>ULTEM</DropdownItem>
+                                                            <DropdownItem key="другой">Другой</DropdownItem>
+                                                            <DropdownItem key="Мне нужна помощь">Мне нужна
+                                                                помощь</DropdownItem>
+
+                                                        </DropdownMenu>
+                                                    </Dropdown>
+                                                </div>
+                                            </td>
+                                        </motion.tr>
+                                    )}
+
+                                    {isSla && (
+                                        <motion.tr
+                                            initial={{opacity: 0, y: -20}}
+                                            animate={{opacity: 1, y: 0}}
+                                            transition={{duration: 0.5}}
+                                            className="border-b border-gray-300 pb-4 mb-4"
+                                        >
+                                            <td className="w-1/4 font-medium">Материал печати</td>
+                                            <td className="w-3/4">
+                                                <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
+                                                    <Dropdown>
+                                                        <DropdownTrigger>
+                                                            <div
+                                                                className="flex flex-wrap md:flex-nowrap gap-4 items-center">
+                                                                <Input
+                                                                    type="text"
+                                                                    labelPlacement="outside-left"
+                                                                    endContent={
+                                                                        <div
+                                                                            className="pointer-events-none flex items-center">
+                                                                        <span
+                                                                            className="text-default-400 text-small">▼</span>
+                                                                        </div>
+                                                                    }
+                                                                    value={selectedMaterialValue}
+                                                                    placeholder={'Выберите материал'}
+                                                                />
+                                                            </div>
+                                                        </DropdownTrigger>
+                                                        <DropdownMenu
+                                                            aria-label="Single selection example"
+                                                            variant="flat"
+                                                            disallowEmptySelection
+                                                            selectionMode="single"
+                                                            selectedKeys={selectedMaterial}
+                                                            onSelectionChange={handleSelectMaterial}
+
+                                                        >
+                                                            <DropdownItem key={'Clear'}>Clear</DropdownItem>
+                                                            <DropdownItem key={'White'}>White</DropdownItem>
+                                                            <DropdownItem key={'Grey'}>Grey</DropdownItem>
+                                                            <DropdownItem key={'Black'}>Black</DropdownItem>
+                                                            <DropdownItem key={'Flexible'}>Flexible</DropdownItem>
+                                                            <DropdownItem key={'Elastic'}>Elastic</DropdownItem>
+                                                            <DropdownItem key={'Rigid 10K'}>Rigid 10K</DropdownItem>
+                                                            <DropdownItem key={'Rigid 4K'}>Rigid 4K</DropdownItem>
+                                                            <DropdownItem key={'Tough 1500'}>Tough 1500</DropdownItem>
+                                                            <DropdownItem key={'Tough 2000'}>Tough 2000</DropdownItem>
+                                                            <DropdownItem key="другой">Другой</DropdownItem>
+                                                            <DropdownItem key="Мне нужна помощь">Мне нужна
+                                                                помощь</DropdownItem>
+                                                        </DropdownMenu>
+                                                    </Dropdown>
+                                                </div>
+                                            </td>
+                                        </motion.tr>
+                                    )}
+
+                                    {isSls && (
+                                        <motion.tr
                                         initial={{opacity: 0, y: -20}}
                                         animate={{opacity: 1, y: 0}}
                                         transition={{duration: 0.5}}
@@ -351,23 +496,72 @@ const Page = () => {
                                                         selectionMode="single"
                                                         selectedKeys={selectedMaterial}
                                                         onSelectionChange={handleSelectMaterial}
+
                                                     >
-                                                        <DropdownItem key="FLEX">FLEX</DropdownItem>
-                                                        <DropdownItem key="HIPS">HIPS</DropdownItem>
-                                                        <DropdownItem key="PVA">PVA</DropdownItem>
-                                                        <DropdownItem key="PETG">PETG</DropdownItem>
-                                                        <DropdownItem key="PLA">PLA</DropdownItem>
-                                                        <DropdownItem key="Nylon">Nylon</DropdownItem>
-                                                        <DropdownItem key="Polycarbonate">Polycarbonate</DropdownItem>
-                                                        <DropdownItem key="ABS">ABS</DropdownItem>
-                                                        <DropdownItem key="PP">PP</DropdownItem>
+                                                        <DropdownItem key={'PA12'}>PA12</DropdownItem>
+                                                        <DropdownItem key="другой">Другой</DropdownItem>
                                                         <DropdownItem key="Мне нужна помощь">Мне нужна
                                                             помощь</DropdownItem>
                                                     </DropdownMenu>
                                                 </Dropdown>
                                             </div>
                                         </td>
-                                    </motion.tr>
+                                    </motion.tr>)}
+
+                                    {isSlm && (
+                                        <motion.tr
+                                            initial={{opacity: 0, y: -20}}
+                                            animate={{opacity: 1, y: 0}}
+                                            transition={{duration: 0.5}}
+                                            className="border-b border-gray-300 pb-4 mb-4"
+                                        >
+                                            <td className="w-1/4 font-medium">Материал печати</td>
+                                            <td className="w-3/4">
+                                                <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
+                                                    <Dropdown>
+                                                        <DropdownTrigger>
+                                                            <div
+                                                                className="flex flex-wrap md:flex-nowrap gap-4 items-center">
+                                                                <Input
+                                                                    type="text"
+                                                                    labelPlacement="outside-left"
+                                                                    endContent={
+                                                                        <div
+                                                                            className="pointer-events-none flex items-center">
+                                                                        <span
+                                                                            className="text-default-400 text-small">▼</span>
+                                                                        </div>
+                                                                    }
+                                                                    value={selectedMaterialValue}
+                                                                    placeholder={'Выберите материал'}
+                                                                />
+                                                            </div>
+                                                        </DropdownTrigger>
+                                                        <DropdownMenu
+                                                            aria-label="Single selection example"
+                                                            variant="flat"
+                                                            disallowEmptySelection
+                                                            selectionMode="single"
+                                                            selectedKeys={selectedMaterial}
+                                                            onSelectionChange={handleSelectMaterial}
+
+                                                        >
+                                                            <DropdownItem key={'Алюминий (AlSi10Mg)'}>Алюминий
+                                                                (AlSi10Mg)</DropdownItem>
+                                                            <DropdownItem key={'Нержавеющая сталь (AISI 316L)'}>Нержавеющая
+                                                                сталь (AISI 316L)</DropdownItem>
+                                                            <DropdownItem key={'Титан (TC4)'}>Титан (TC4)</DropdownItem>
+                                                            <DropdownItem key={'Кобольт-Хром (СoCrMo)'}>Кобольт-Хром
+                                                                (СoCrMo)</DropdownItem>
+                                                            <DropdownItem key="другой">Другой</DropdownItem>
+                                                            <DropdownItem key="Мне нужна помощь">Мне нужна
+                                                                помощь</DropdownItem>
+                                                        </DropdownMenu>
+                                                    </Dropdown>
+                                                </div>
+                                            </td>
+                                        </motion.tr>
+                                    )}
 
                                     {needHelp && (
                                         <>
@@ -412,7 +606,7 @@ const Page = () => {
                                         transition={{duration: 0.5}}
                                         className="border-b border-gray-300 pb-4 mb-4"
                                     >
-                                        <td className="w-1/4 font-medium">Количество</td>
+                                    <td className="w-1/4 font-medium">Количество</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3 w-fit">
                                                 <Input placeholder="Введите количество"
