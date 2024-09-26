@@ -4,6 +4,7 @@ import {BreadcrumbItem, Breadcrumbs} from "@nextui-org/react";
 import BreadCrumb from "../../components/UI/BreadCrumb";
 import SimpleHeader from "@/components/header/SimpleHeader";
 import Slider from "@/components/UI/Slider";
+import OrderButton from "@/components/UI/OrderButton";
 export async function generateStaticParams() {
     return [
         {
@@ -122,11 +123,7 @@ const Page = () => {
                                     </p>
                                 </div>
                             </div>
-                            <Link href={'/create_order'}
-                                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-blue-dark lg:px-7"
-                            >
-                                Оставить заявку
-                            </Link>
+                            <OrderButton />
                         </div>
                         <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
                             <Slider slides={slides}/>

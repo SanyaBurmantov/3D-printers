@@ -2,9 +2,13 @@
 import React, {useState} from 'react';
 import styles from './ui.module.scss'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import { Grid, Pagination } from 'swiper/modules';
 import {Image, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure} from "@nextui-org/react";
+import './stylesswiper.css';
+import 'swiper/css';
+import 'swiper/css/grid';
+import 'swiper/css/pagination';
+
 
 export interface ISliderProps {
     slides: string[]
@@ -24,36 +28,23 @@ const Slider = (props: ISliderProps) => {
     }
     return (
         <>
-            <div className={styles.sliderWrapper}>
-
-                <div className={styles.slider}>
+            <div className="w-full relative">
+                <div className="lg:fixed top-40 lg:w-[47%] h-[600px]">
                     <Swiper
-                        loop={true}
-                        spaceBetween={10}
-                        navigation={true}
-                        thumbs={{ swiper: thumbsSwiper }}
-                        modules={[FreeMode, Navigation, Thumbs]}
-                        className={styles.mySwiper2}
+                        slidesPerView={3}
+                        grid={{
+                            rows: 3,
+                        }}
+                        spaceBetween={15}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        modules={[Grid, Pagination]}
+                        className="mySwiper"
                     >
                         {props.slides.map(slide => (
-                            <SwiperSlide className={styles.swiperSlide} key={slide}>
-                                <Image onClick={() => handleOpenModal(slide)} removeWrapper={true} style={{height: '100%'}} className="block w-full h-full object-contain cursor-pointer" src={slide} alt={slide} />
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                    <Swiper
-                        onSwiper={setThumbs}
-                        loop={true}
-                        spaceBetween={10}
-                        slidesPerView={4.5}
-                        freeMode={true}
-                        watchSlidesProgress={true}
-                        modules={[FreeMode, Navigation, Thumbs]}
-                        className={styles.mySwiper}
-                    >
-                        {props.slides.map(slide => (
-                            <SwiperSlide className={styles.swiperSlide} key={slide}>
-                                <Image  removeWrapper={true} className="block w-full h-full object-contain" src={slide} alt={slide} />
+                            <SwiperSlide key={slide} onClick={() => handleOpenModal(slide)}>
+                                <img className="object-cover w-full h-full" src={slide} alt={slide} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -65,8 +56,8 @@ const Slider = (props: ISliderProps) => {
                         <>
                             <ModalHeader className="flex flex-col gap-1 h-full"></ModalHeader>
                             <ModalBody className="flex items-center justify-center h-full">
-                                <div className="max-h-[70vh] overflow-hidden flex items-center justify-center">
-                                    <Image removeWrapper={true} className="block max-h-full object-contain" src={modalImage} />
+                                <div className="h-[70vh] overflow-hidden flex items-center justify-center">
+                                    <img alt={modalImage} className="block w-full h-full object-contain" src={modalImage} />
                                 </div>
                             </ModalBody>
                         </>

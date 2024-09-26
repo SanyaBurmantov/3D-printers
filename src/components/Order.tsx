@@ -9,6 +9,7 @@ import {AnimatePresence, motion} from 'framer-motion';
 import {AttachmentsFileInput} from "@/components/Inputs/AttachmentFileInput";
 import { useForm, ValidationError } from '@formspree/react';
 import axios from "axios";
+import {log} from "node:util";
 
 const Page = () => {
     const [state, handleSubmit] = useForm("myzgvavl");
@@ -23,7 +24,9 @@ const Page = () => {
     const [selectedTechnology, setSelectedTechnology] = React.useState(new Set(['']));
     const [selectedMaterial, setSelectedMaterial] = React.useState(new Set(['']));
     const [selectedSomething, setSelectedSomething] = React.useState(false)
-    const [gabarit, setGabarit] = React.useState('');
+    const [gabarith, setGabarith] = React.useState('');
+    const [gabaritl, setGabaritl] = React.useState('');
+    const [gabaritw, setGabaritw] = React.useState('');
     const [pressure, setPressure] = React.useState('');
     const [uses, setUses] = React.useState('');
     const [count, setCount] = React.useState('');
@@ -55,8 +58,20 @@ const Page = () => {
     const handleSelectMaterial = (keys: any) => {
         setSelectedMaterial(keys)
     }
-    const handleSelectGabarit = (value: any) => {
-        setGabarit(value);
+    const handleSelectGabarith = (value: any) => {
+        if(isNaN(Number(value))){
+            return
+        } else setGabarith(value);
+    };
+    const handleSelectGabaritl = (value: any) => {
+        if(isNaN(Number(value))){
+            return
+        } else setGabaritl(value);
+    };
+    const handleSelectGabaritw = (value: any) => {
+        if(isNaN(Number(value))){
+            return
+        } else setGabaritw(value);
     };
 
     const handleSelectPreasure = (value: any) => {
@@ -80,14 +95,15 @@ const Page = () => {
     };
 
     const validateNumber = (value: string) => {
-        return value.length > 7
+        const phonePattern = /^(?:\+375\d{9}|80\d{9})$/;
+        return phonePattern.test(value);
     };
 
     const isInvalidNumber = React.useMemo(() => {
         if (number === "") return false;
-
         return validateNumber(number) ? false : true;
     }, [number]);
+
 
     const handleSelectMail = (value: any) => {
         setMail(value);
@@ -125,19 +141,16 @@ const Page = () => {
         setIsSla(false);
         setIsSlm(false);
         setIsSls(false);
+        setNeedHelp(false)
         setSelectedMaterial(new Set(['']));
         if (selectedTechnology.has("FDM/FFF")) {
             setIsFdm(true);
-            console.log('FDM selected');
         } else if (selectedTechnology.has("SLA")) {
             setIsSla(true);
-            console.log('SLA selected');
         } else if (selectedTechnology.has("SLM")) {
             setIsSlm(true);
-            console.log('SLM selected');
         } else if (selectedTechnology.has("SLS")) {
             setIsSls(true);
-            console.log('SLS selected');
         }
     }, [selectedTechnology]);
 
@@ -157,7 +170,7 @@ const Page = () => {
                 нужно сканирование: ${needScan ? 'Да' : 'Нет'} %0A
                 нужно моделирование: ${needModel ? 'Да' : 'Нет'} %0A
                 нужна печать: ${needPrint ? 'Да' : 'Нет'} %0A
-                габариты: ${gabarit} %0A
+                габариты: ${gabarith} ${gabaritw} ${gabaritl} %0A
                 технология: ${selectedTechnology.values().next().value} %0A
                 материал: ${selectedMaterial.values().next().value} %0A
                 количество: ${count} %0A
@@ -218,9 +231,9 @@ const Page = () => {
     );
 
     const disableForm = () => {
-        if (!isInvalidFio && !isInvalidNumber && !fio && !number)
+        if (!isInvalidFio && !fio && !number)
             return true
-        return isInvalidFio && isInvalidNumber && !fio && !number
+        return isInvalidFio && !fio && !number
     }
 
     useEffect(() => {
@@ -236,10 +249,12 @@ const Page = () => {
     useEffect(() => {
         if (selectedMaterial.has("Мне нужна помощь")) {
             setNeedHelp(true)
+        } else if (selectedTechnology.has("Мне нужна помощь")){
+            setNeedHelp(true)
         } else {
             setNeedHelp(false)
         }
-    }, [selectedMaterial])
+    }, [selectedMaterial, selectedTechnology])
 
     return (
         <>
@@ -279,13 +294,16 @@ const Page = () => {
                                 >
                                     <td className="w-1/4 font-medium">Габариты</td>
                                     <td className="w-3/4">
-                                        <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3 w-fit">
-                                            <Input type="number" placeholder="Высота" labelPlacement="outside-left"
-                                                   onValueChange={handleSelectGabarit}/>
-                                            <Input type="number" placeholder="Длина" labelPlacement="outside-left"
-                                                   onValueChange={handleSelectGabarit}/>
-                                            <Input type="number" placeholder="Ширина" labelPlacement="outside-left"
-                                                   onValueChange={handleSelectGabarit}/>
+                                        <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
+                                            <Input type="text"  className='w-[100px]' placeholder="Высота" labelPlacement="outside-left"
+                                                   isInvalid={false}
+                                                   onValueChange={handleSelectGabarith}
+                                                   value={gabarith}
+                                            />
+                                            <Input type="text" className='w-[100px]' placeholder="Длина" labelPlacement="outside-left"
+                                                   onValueChange={handleSelectGabaritl} value={gabaritl}/>
+                                            <Input type="text" className='w-[100px]' placeholder="Ширина" labelPlacement="outside-left"
+                                                   onValueChange={handleSelectGabaritw} value={gabaritw}/>
                                             <div className="pointer-events-none flex items-center">
                                                 <span className="text-default-400 text-small">мм</span>
                                             </div>
@@ -335,6 +353,7 @@ const Page = () => {
                                                         <DropdownItem key="SLA">SLA</DropdownItem>
                                                         <DropdownItem key="SLS">SLS</DropdownItem>
                                                         <DropdownItem key="SLM">SLM</DropdownItem>
+                                                        <DropdownItem key="Мне нужна помощь">Мне нужна помощь</DropdownItem>
                                                     </DropdownMenu>
                                                 </Dropdown>
                                             </div>
@@ -575,8 +594,7 @@ const Page = () => {
                                                 <td className="w-3/4">
                                                     <div
                                                         className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                        <Input placeholder="Укажите нагрузки"
-                                                               labelPlacement="outside-left" value={pressure}
+                                                        <Textarea  placeholder="Укажите нагрузки"  className="max-w-xs" value={pressure}
                                                                onValueChange={handleSelectPreasure}/>
                                                     </div>
                                                 </td>
@@ -591,9 +609,9 @@ const Page = () => {
                                                 <td className="w-3/4">
                                                     <div
                                                         className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                        <Input placeholder="Опишите условия эксплуатации" value={uses}
-                                                               onValueChange={handleSelectUses}
-                                                               labelPlacement="outside-left"/>
+                                                        <Textarea placeholder="Опишите условия эксплуатации" value={uses}
+                                                               onValueChange={handleSelectUses}  className="max-w-xs"
+                                                              />
                                                     </div>
                                                 </td>
                                             </motion.tr>
@@ -644,10 +662,13 @@ const Page = () => {
                                         <td className="w-1/4 font-medium">Номер телефона</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
-                                                <Input placeholder="Контактный телефон" type="number"
-                                                       labelPlacement="outside-left" isRequired
-                                                       isInvalid={isInvalidNumber} onValueChange={handleSelectNumber}
-                                                       errorMessage="Пожалуйста, введите номер телефона"
+                                                <Input placeholder="Контактный телефон" type="text"
+                                                       labelPlacement="outside-left"
+                                                       isRequired
+                                                       onValueChange={handleSelectNumber}
+                                                       isInvalid={isInvalidNumber}
+                                                       color={isInvalidNumber ? "danger" : "default"}
+                                                       errorMessage="Формат ввода +375ххххххххх или 80ххххххххх"
                                                        value={number}/>
                                             </div>
                                         </td>
@@ -675,7 +696,7 @@ const Page = () => {
                                         transition={{duration: 0.5}}
                                         className="border-b border-gray-300 pb-4 mb-4"
                                     >
-                                        <td className="w-1/4 font-medium">Ваши ФИО</td>
+                                        <td className="w-1/4 font-medium">ФИО</td>
                                         <td className="w-3/4">
                                             <div className="flex flex-wrap md:flex-nowrap gap-4 items-center m-3">
                                                 <Input placeholder="ФИО" labelPlacement="outside-left" isRequired
