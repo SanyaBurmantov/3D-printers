@@ -6,12 +6,12 @@ import {Image} from "@nextui-org/react";
 const GetStarted = () => {
     return (
         <div
-            className="relative mt-[-1px] bg-white dark:bg-dark pt-[40px] pb-[50px] lg:pt-[19px]"
+            className="relative mt-[-1px] bg-white dark:bg-dark pt-[40px] pb-[50px] lg:pt-[50px]"
         >
             <div className="container mx-auto">
                 <div className="flex flex-wrap items-center -mx-4">
                     <div className="w-full px-4 lg:w-6/12">
-                        <div className="hero-content relative">
+                        <div className="hero-content relative lg:mt-[20px]">
                             <h1
                                 className="mb-5 text-4xl font-bahnschrift font-bold font-stretch-condensed !leading-[1.208] text-dark dark:text-white sm:text-[32px] lg:text-[30px] xl:text-2xl"
                             >

@@ -23,15 +23,15 @@ const SimpleHeader = () => {
                     </div>
                 </Link>
                 <div className="hidden md:flex md:gap-5 md:items-center ">
-                    <Link className={styles.navigationItem} href="/fdm_fff">FDM/FFF</Link>
-                    <Link className={styles.navigationItem} href="/sla">SLA</Link>
-                    <Link className={styles.navigationItem} href="/slm">SLM</Link>
-                    <Link className={styles.navigationItem} href="/sls">SLS</Link>
+                    <Link className={`${styles.navigationItem}, text-base`} href="/fdm_fff">FDM/FFF</Link>
+                    <Link className={`${styles.navigationItem}, text-base`} href="/sla">SLA</Link>
+                    <Link className={`${styles.navigationItem}, text-base`} href="/sls">SLS</Link>
+                    <Link className={`${styles.navigationItem}, text-base`} href="/slm">SLM</Link>
                 </div>
                 <div className="flex flex-row gap-1 items-center">
                     <div className={styles.contacts}>
-                        <div className="">+375333422423</div>
-                        <div className="">info@sparxlab.by</div>
+                        <div className="text-base">+375333422423</div>
+                        <div className="text-base">info@sparxlab.by</div>
                     </div>
                     <Link className={styles.navigationItem} href="/create_order">
                         <button

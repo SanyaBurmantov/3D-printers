@@ -13,8 +13,8 @@ export default function Home() {
           <main className="">
             <GetStarted />
             <OurFeatures />
-            <ContactUs />
           </main>
+
       </NextUIProvider>
   );
 }

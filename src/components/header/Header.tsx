@@ -45,8 +45,9 @@ const Header = () => {
                     </Link>
                     <Link className={styles.navigationItem} href="/fdm_fff">FDM/FFF</Link>
                     <Link className={styles.navigationItem} href="/sla">SLA</Link>
-                    <Link className={styles.navigationItem} href="/slm">SLM</Link>
                     <Link className={styles.navigationItem} href="/sls">SLS</Link>
+                    <Link className={styles.navigationItem} href="/slm">SLM</Link>
+
                 </div>
     <div className={styles.contacts}>
     <div className="">+37533 342234234234</div>
@@ -85,8 +86,9 @@ const Header = () => {
                     <div className="hidden md:flex md:gap-5 md:items-center ">
                         <Link className={styles.navigationItem} href="/fdm_fff">FDM/FFF</Link>
                         <Link className={styles.navigationItem} href="/sla">SLA</Link>
-                        <Link className={styles.navigationItem} href="/slm">SLM</Link>
                         <Link className={styles.navigationItem} href="/sls">SLS</Link>
+                        <Link className={styles.navigationItem} href="/slm">SLM</Link>
+
                     </div>
                     <div className="flex flex-row">
                     <div className={styles.contacts}>

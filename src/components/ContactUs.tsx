@@ -15,7 +15,7 @@ export interface IContactTextArea {
 const ContactUs = () => {
     return (
         <>
-            <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]">
+            <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:pt-[60px] lg:pb-[40px]">
                 <div className="container">
                     <div className="-mx-4 flex flex-wrap lg:justify-between">
                         <div className="w-full px-4">

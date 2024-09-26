@@ -6,6 +6,8 @@ import {bgWhite} from "next/dist/lib/picocolors";
 import HelpBtn from "@/components/UI/HelpBtn";
 import { useRouter } from 'next/navigation';
 import GoTopBtn from "@/components/UI/GoTopBtn";
+import ContactUs from "@/components/ContactUs";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,10 +34,10 @@ export default function RootLayout({
     <html lang="en">
 
       <body className={inter.className}>
-
           {children}
         <HelpBtn />
         <GoTopBtn />
+        <ContactUs />
       </body>
     </html>
   );
